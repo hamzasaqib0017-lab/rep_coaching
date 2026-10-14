@@ -1,0 +1,9 @@
+  /* hover glossary (build/glossary.rb + build/js_glossary.js) */
+  .gl-term{border-bottom:1px dotted rgba(59,91,219,.75);cursor:help;outline:none;border-radius:2px}
+  .gl-term:hover,.gl-term:focus{border-bottom-style:solid;border-bottom-color:#3B5BDB;background:rgba(59,91,219,.08)}
+  #gl-tip{position:fixed;z-index:10000;max-width:340px;background:#fff;color:#141B2D;border:1px solid #d9dcea;border-top:3px solid #3B5BDB;border-radius:8px;padding:10px 12px;box-shadow:0 8px 24px rgba(20,27,45,.16);font-size:12.5px;line-height:1.5;font-weight:400;text-transform:none;letter-spacing:0;text-align:left;white-space:normal}
+  #gl-tip[hidden]{display:none}
+  #gl-tip .gl-tip-term{font-weight:700;font-size:13px;margin-bottom:3px;color:#141B2D}
+  #gl-tip .gl-tip-def{color:#333}
+  #gl-tip .gl-tip-where{margin-top:6px;font-size:11px;color:#666}
+  #gl-tip.above{border-top:1px solid #d9dcea;border-bottom:3px solid #3B5BDB}

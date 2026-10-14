@@ -1,0 +1,40 @@
+{
+  "_about": "Example run for the fictional Bluewick Fleet Systems. Paths are relative to this folder. The call and email scores are already in workspace/scores, so steps 1-3 are done; run assemble.rb, build_app.rb and check.rb.",
+  "company": {
+    "name": "Bluewick",
+    "sells": "GPS tracking, ELD compliance and dashcams to commercial fleets"
+  },
+  "footer": "Bluewick Fleet Systems is a fictional company. Every rep, deal and score in this app is synthetic demo data.",
+  "deals_csv": "deals.csv",
+  "columns": {
+    "deal_id": "Opportunity ID",
+    "account": "Account Name",
+    "owner": "Opportunity Owner",
+    "stage": "Stage",
+    "close_date": "Close Date",
+    "division": "Owner Division"
+  },
+  "won_stages": [
+    "Closed Won"
+  ],
+  "lost_stages": [
+    "Closed Lost"
+  ],
+  "content": "content.json",
+  "weights": {
+    "metrics": 22.2,
+    "economic_buyer": 35.8,
+    "decision_criteria": 6.8,
+    "decision_process": 11.1,
+    "identify_pain": 16.0,
+    "champion": 8.0,
+    "rapport": 8.6,
+    "upfront_contract": 0.0,
+    "pain": 17.2,
+    "budget": 10.2,
+    "decision": 8.6,
+    "fulfillment": 31.2,
+    "postsell": 24.2
+  },
+  "output": "bluewick_rep_coaching.html"
+}

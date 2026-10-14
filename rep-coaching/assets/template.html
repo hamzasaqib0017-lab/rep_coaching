@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{COMPANY}} Rep Coaching</title>
+<style>
+/* Brand: navy with indigo / coral / sage / amber accents. v2 (2026-10-08) calms v1's neon blocks:
+   hues are kept, but large surfaces use soft tints, saturated colour is reserved for small marks (bars,
+   letters, rules), shadows are soft, borders are hairlines. Score bands match the dashboard: weak < 4,
+   building 4–6, strong ≥ 6 on the 0–10 combined scale; the number is always printed beside the colour. */
+:root{
+  --navy:#1B2236;--navy-2:#252E47;--navy-3:#323C58;--page:#F6F5F1;--paper:#FFFFFF;--ink:#1B2236;--muted:#5E6577;
+  --line:#E4E2DA;--line-2:#D3D0C6;
+  --indigo:#4F63C6;--indigo-tint:#ECEFFA;--indigo-ink:#33449C;
+  --coral:#D9745F;--coral-tint:#FBEEEA;--coral-ink:#9A4433;
+  --sage:#8FAE45;--sage-tint:#F0F5E3;--sage-ink:#55701D;--sage-glow:#C3D88A;
+  --amber:#D3913A;--amber-tint:#FBF1E1;--amber-ink:#8A5A12;
+  --weak:#CC5A51;--weak-tint:#F8DEDB;--weak-ink:#9A2E27;
+  --building:#D8923F;--building-tint:#FAEAD2;--building-ink:#83500C;
+  --strong:#4F63C6;--strong-tint:#E1E6F9;--strong-ink:#2F42A0;
+  --shadow:0 1px 2px rgba(27,34,54,.05),0 8px 24px rgba(27,34,54,.06);
+  --shadow-hover:0 2px 4px rgba(27,34,54,.06),0 14px 32px rgba(27,34,54,.10);
+  --r:12px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+html,body{margin:0;padding:0;background:var(--page);color:var(--ink);font-family:'Avenir Next','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+button{font-family:inherit}
+h1,h2,h3,h4{margin:0}
+.wrap{padding-left:clamp(16px,6vw,86px);padding-right:clamp(16px,6vw,86px)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ── top bar + tabs ── */
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px;background:var(--navy);border-bottom:1px solid rgba(255,255,255,.06)}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:17.5px;white-space:nowrap}
+.brand-mark{display:grid;place-items:center;width:28px;height:28px;background:var(--sage-glow);color:var(--navy);font-weight:800;font-size:16px;border-radius:8px}
+.brand small{color:rgba(255,255,255,.5);font-weight:500;font-size:14.5px}
+nav.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+nav.tabs button{padding:8px 14px;border:none;border-radius:8px;background:transparent;color:rgba(255,255,255,.68);font-size:15px;font-weight:600;cursor:pointer;transition:background .15s ease,color .15s ease}
+nav.tabs button:hover{color:#fff;background:rgba(255,255,255,.06)}
+nav.tabs button.active{background:rgba(255,255,255,.10);color:#fff;box-shadow:inset 0 -2px 0 var(--sage-glow)}
+nav.tabs button:focus-visible{outline:2px solid var(--sage-glow);outline-offset:2px}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* ── hero (Start Here, 101) ── */
+.hero{position:relative;padding-top:64px;padding-bottom:56px;color:#fff;background:var(--navy);isolation:isolate;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:42px 42px}
+.hero::after{content:"";position:absolute;z-index:-1;right:-180px;top:-200px;width:620px;height:620px;border-radius:50%;background:radial-gradient(closest-side,rgba(79,99,198,.32),transparent)}
+.hero.opener{min-height:calc(100vh - 110px);display:flex;flex-direction:column;justify-content:center}
+.eyebrow{display:flex;align-items:center;gap:9px;margin:0 0 22px;color:var(--sage-glow);font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--sage-glow);box-shadow:0 0 0 4px rgba(195,216,138,.14)}
+.hero h1{max-width:980px;font-size:clamp(41.5px,5.6vw,87.5px);line-height:1;letter-spacing:-.035em;font-weight:700}
+.hero h1 em{font-style:normal;color:var(--sage-glow)}
+.hero-copy{max-width:680px;margin:24px 0 0;color:rgba(255,255,255,.72);font-size:clamp(16px,1.35vw,19.5px);line-height:1.65}
+.route{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.route button{position:relative;min-height:150px;padding:22px 22px 20px;border:1px solid rgba(255,255,255,.09);border-top:3px solid var(--c);border-radius:var(--r);background:var(--navy-2);color:#fff;text-align:left;cursor:pointer;transition:transform .2s ease,background .2s ease,border-color .2s ease}
+.route button:nth-child(1){--c:var(--indigo)}.route button:nth-child(2){--c:var(--sage)}.route button:nth-child(3){--c:var(--coral)}
+.route button:hover,.route button:focus-visible{transform:translateY(-3px);background:var(--navy-3);outline:none}
+.route small{display:block;margin-bottom:20px;font-size:12.5px;font-weight:700;letter-spacing:.1em;color:var(--c);filter:brightness(1.35)}
+.route strong{display:block;max-width:280px;font-size:clamp(22px,1.8vw,27.5px);line-height:1.15;letter-spacing:-.02em;font-weight:600}
+.route b{position:absolute;right:20px;bottom:16px;font-size:23px;font-weight:500;color:rgba(255,255,255,.55);transition:transform .2s ease,color .2s ease}
+.route button:hover b{transform:translate(3px,-3px);color:#fff}
+.marquee{display:flex;gap:34px;overflow:hidden;padding:13px 0;background:var(--navy-2);border-top:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.6);font-size:13px;font-weight:700;letter-spacing:.1em;white-space:nowrap}
+.marquee span{animation:crawl 24s linear infinite}
+.marquee b{color:var(--sage-glow);font-weight:700}
+@keyframes crawl{to{transform:translateX(-100%)}}
+@media(prefers-reduced-motion:reduce){.marquee span{animation:none}html{scroll-behavior:auto}}
+
+/* ── blocks ── */
+.section{padding-top:52px;padding-bottom:52px}
+.section + .section{padding-top:8px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:24px}
+.sec-head h2{max-width:760px;font-size:clamp(27.5px,3vw,43.5px);line-height:1.1;letter-spacing:-.03em;font-weight:700}
+.sec-head p{max-width:420px;margin:0;font-size:15px;line-height:1.65;color:var(--muted)}
+.kicker{display:inline-block;margin-bottom:10px;color:var(--indigo);font-size:12.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.04em;white-space:nowrap}
+.pill.meddic{background:var(--indigo-tint);color:var(--indigo-ink)}
+.pill.sandler{background:var(--coral-tint);color:var(--coral-ink)}
+.label{margin:0 0 12px;font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;font-size:14px;color:var(--muted)}
+.legend i{display:inline-block;width:11px;height:11px;margin-right:6px;vertical-align:-1px;border-radius:3px}
+.legend i.tick{width:2px;height:13px;border-radius:0;background:var(--navy)}
+
+/* page head for content tabs */
+.page-head{padding-top:44px;padding-bottom:34px;background:var(--paper);border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.page-head::after{content:"";position:absolute;right:clamp(16px,6vw,86px);top:44px;width:120px;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--indigo) 0 25%,var(--sage) 25% 50%,var(--amber) 50% 75%,var(--coral) 75%)}
+.page-head h1{font-size:clamp(37px,4.4vw,64.5px);line-height:1.05;letter-spacing:-.035em;font-weight:700}
+.page-head p{max-width:720px;margin:14px 0 0;font-size:17.5px;line-height:1.6;color:var(--muted)}
+
+/* ── Team Summary ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{padding:20px 20px 18px;border:1px solid var(--line);border-top:3px solid var(--c);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow)}
+.stat:nth-child(1){--c:var(--indigo)}.stat:nth-child(2){--c:var(--coral)}.stat:nth-child(3){--c:var(--amber)}.stat:nth-child(4){--c:var(--sage)}
+.stat .v{font-size:clamp(32px,3vw,46px);font-weight:700;line-height:1;letter-spacing:-.03em}
+.stat .v small{font-size:.42em;font-weight:600;letter-spacing:0;color:var(--muted)}
+.stat .l{margin-top:12px;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.stat .d{margin-top:6px;font-size:14.5px;line-height:1.55;color:var(--muted)}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:12px}
+.flow-card{min-height:190px;padding:22px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow)}
+.flow-card span{display:grid;width:34px;height:34px;place-items:center;margin-bottom:22px;border-radius:10px;background:var(--c);color:#fff;font-weight:700}
+.flow-card:nth-child(1){--c:var(--indigo)}.flow-card:nth-child(3){--c:var(--sage)}.flow-card:nth-child(5){--c:var(--coral)}
+.flow-card h4{margin:0 0 8px;font-size:20.5px;letter-spacing:-.015em}.flow-card p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.65}
+.flow-arrow{display:grid;place-items:center;font-size:25.5px;color:var(--line-2)}
+.bands{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.band{padding:18px 20px;border-radius:var(--r);border-left:5px solid var(--c);background:var(--t)}
+.band.weak{--c:var(--weak);--t:var(--weak-tint);color:var(--weak-ink)}.band.building{--c:var(--building);--t:var(--building-tint);color:var(--building-ink)}.band.strong{--c:var(--strong);--t:var(--strong-tint);color:var(--strong-ink)}
+.band b{display:block;font-size:25.5px;letter-spacing:-.02em;line-height:1.1}.band span{display:block;margin-top:6px;font-size:14.5px;line-height:1.55}
+.heat-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);background:var(--paper)}
+table.heat{width:100%;border-collapse:separate;border-spacing:3px;font-size:14px;min-width:920px;padding:6px}
+table.heat th{padding:8px 6px;font-size:12.5px;font-weight:700;text-align:center;vertical-align:bottom;line-height:1.25;color:var(--ink)}
+table.heat th.fw{font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:6px;border-radius:6px}
+table.heat th.fw.m{background:var(--indigo-tint);color:var(--indigo-ink)}table.heat th.fw.s{background:var(--coral-tint);color:var(--coral-ink)}
+table.heat th .w{display:block;margin-top:3px;font-weight:500;color:var(--muted)}
+table.heat td{padding:9px 4px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums;border-radius:5px;cursor:default}
+td.h-weak{background:var(--weak-tint);color:var(--weak-ink)}td.h-building{background:var(--building-tint);color:var(--building-ink)}td.h-strong{background:var(--strong-tint);color:var(--strong-ink)}
+table.heat td.rep{padding:8px 10px;text-align:left;color:var(--ink);font-weight:600;white-space:nowrap;background:transparent;cursor:pointer}
+table.heat td.rep:hover{background:var(--page)}
+table.heat tr.sel td.rep{background:var(--navy);color:#fff}
+table.heat tr.team td{background:#F1F0EB;color:var(--ink);font-weight:700}
+table.heat tr.team td.rep{cursor:default}
+
+/* ── Rep Coaching ── */
+.picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.chip{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--paper);cursor:pointer;text-align:left;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease}
+.chip:hover,.chip:focus-visible{border-color:var(--line-2);box-shadow:var(--shadow);transform:translateY(-1px);outline:none}
+.chip.active{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:inset 0 -3px 0 var(--sage-glow)}
+.chip strong{font-size:15.5px;line-height:1.25;font-weight:600}
+.chip span{font-size:12.5px;font-weight:500;opacity:.68}
+.profile{margin-top:26px;padding:0;overflow:hidden}
+.profile-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:20px;padding:26px 28px;background:var(--navy);color:#fff}
+.profile-top h2{font-size:clamp(30px,3vw,43.5px);line-height:1.05;letter-spacing:-.03em;font-weight:700}
+.profile-top .meta{margin-top:8px;font-size:15px;color:rgba(255,255,255,.66)}
+.profile-top .rank{display:inline-block;margin-top:12px;padding:4px 10px;border-radius:999px;background:rgba(195,216,138,.16);color:var(--sage-glow);font-size:12.5px;font-weight:700;letter-spacing:.05em}
+.tiles{display:flex;gap:12px;flex-wrap:wrap}
+.tile{min-width:132px;padding:14px 16px;border-radius:10px;background:var(--navy-2);border-top:3px solid var(--c)}
+.tile.m{--c:var(--indigo)}.tile.s{--c:var(--coral)}
+.tile .v{font-size:37px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.tile .v small{font-size:15px;font-weight:600;opacity:.6}
+.tile .l{margin-top:8px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.tile .t{margin-top:3px;font-size:13px;opacity:.66}
+.profile-body{padding:26px 28px 30px}
+.prios{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.prio{position:relative;padding:18px 18px 16px;border-radius:var(--r);background:var(--t);border-top:3px solid var(--c)}
+.prio:nth-child(1){--c:var(--coral);--t:var(--coral-tint);--k:var(--coral-ink)}.prio:nth-child(2){--c:var(--indigo);--t:var(--indigo-tint);--k:var(--indigo-ink)}.prio:nth-child(3){--c:var(--sage);--t:var(--sage-tint);--k:var(--sage-ink)}
+.prio .n{position:absolute;top:14px;right:16px;font-size:34.5px;font-weight:700;line-height:1;color:var(--c);opacity:.45}
+.prio h4{font-size:22px;line-height:1.15;letter-spacing:-.02em;padding-right:40px;margin-top:8px}
+.prio .why{margin:6px 0 12px;font-size:13px;font-weight:600;color:var(--k)}
+.prio p{margin:0;font-size:14.5px;line-height:1.6}
+.prio .ask{margin-top:12px;padding:10px 12px;background:var(--paper);border-radius:8px;font-size:14.5px;line-height:1.5}
+.prio .ask b{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px;color:var(--k)}
+.bars-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;margin-top:30px}
+.bar-row{display:grid;grid-template-columns:132px 1fr 46px;align-items:center;gap:12px;padding:5px 0;font-size:14.5px}
+.bar-track{position:relative;height:10px;background:#EEEDE7;border-radius:5px}
+.bar-fill{position:absolute;left:0;top:0;bottom:0;border-radius:5px}
+.bar-tick{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--navy);border-radius:1px}
+.bar-val{text-align:right;font-weight:700}
+details.dim{border:1px solid var(--line);border-radius:10px;background:var(--paper);margin-top:8px;overflow:hidden}
+details.dim summary{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:11px 14px;cursor:pointer;font-weight:600;font-size:16px;list-style:none}
+details.dim summary::-webkit-details-marker{display:none}
+details.dim summary::after{content:"+";margin-left:auto;font-size:20.5px;line-height:1;color:var(--muted)}
+details.dim[open] summary::after{content:"–"}
+details.dim summary:hover{background:#FAFAF7}
+details.dim[open] summary{border-bottom:1px solid var(--line);background:#FAFAF7}
+.dim-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;padding:16px}
+.dim-body h5{margin:0 0 6px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.dim-body p,.dim-body li{margin:0;font-size:14.5px;line-height:1.65}
+.dim-body ul{margin:0;padding-left:18px}
+.score-chip{display:inline-block;min-width:46px;padding:2px 8px;border-radius:6px;text-align:center;font-weight:700;font-size:14px}
+.score-chip.h-weak{background:var(--weak-tint);color:var(--weak-ink)}.score-chip.h-building{background:var(--building-tint);color:var(--building-ink)}.score-chip.h-strong{background:var(--strong-tint);color:var(--strong-ink)}
+
+/* ── MEDDIC & Sandler 101 ── */
+.versus{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch}
+.vs-card{padding:26px;border-radius:var(--r);background:var(--t);border-top:4px solid var(--c)}
+.vs-card.m{--c:var(--indigo);--t:var(--indigo-tint);--k:var(--indigo-ink)}.vs-card.s{--c:var(--coral);--t:var(--coral-tint);--k:var(--coral-ink)}
+.vs-card h3{font-size:clamp(32px,3.2vw,46px);line-height:1;letter-spacing:-.035em;color:var(--k)}
+.vs-card .q{margin-top:8px;font-size:clamp(18.5px,1.6vw,23px);font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.vs-card dl{margin:18px 0 0;display:grid;grid-template-columns:110px 1fr;gap:10px 14px;font-size:15px;line-height:1.55}
+.vs-card dt{font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding-top:2px;color:var(--k)}
+.vs-card dd{margin:0}
+.vs-mid{display:grid;place-items:center}
+.vs-mid span{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--navy);color:#fff;font-size:17.5px;font-weight:700}
+.letters{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.letter-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
+.letter-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+.lc-top{display:flex;align-items:center;gap:14px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.big-letter{display:grid;place-items:center;flex:0 0 auto;width:52px;height:52px;border-radius:12px;font-size:32px;font-weight:700;line-height:1;color:#fff}
+.c0{background:var(--indigo)}.c1{background:var(--coral)}.c2{background:var(--sage)}.c3{background:var(--amber)}.c4{background:var(--navy)}.c5{background:#7383D3}.c6{background:#C9826F}
+.lc-top h4{font-size:20.5px;line-height:1.15;letter-spacing:-.015em}
+.lc-top .plain{margin-top:3px;font-size:14px;line-height:1.5;color:var(--muted)}
+.lc-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:14px;flex:1}
+.lc-q{padding:10px 12px;background:var(--page);border-left:3px solid var(--indigo);border-radius:0 8px 8px 0;font-size:14.5px;line-height:1.55;font-style:italic}
+.ladder{display:grid;gap:7px}
+.rung{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;font-size:14px;line-height:1.55}
+.rung b{display:grid;place-items:center;height:22px;border-radius:6px;font-size:13px}
+.rung.r1 b{background:var(--weak-tint);color:var(--weak-ink)}.rung.r3 b{background:var(--building-tint);color:var(--building-ink)}.rung.r5 b{background:var(--sage-tint);color:var(--sage-ink)}
+.weight{margin-top:auto;padding-top:4px}
+.weight-row{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:6px}
+.weight-track{height:8px;border-radius:4px;background:#EEEDE7;position:relative;overflow:hidden}
+.weight-fill{position:absolute;inset:0 auto 0 0;border-radius:4px;background:var(--navy)}
+.weight-note{margin-top:7px;font-size:13px;line-height:1.5;color:var(--muted)}
+.letter-card.rule{background:var(--navy);color:#fff;border-color:var(--navy);padding:26px 24px;justify-content:space-between;gap:18px}
+.letter-card.rule .kicker{color:var(--sage-glow)}
+.letter-card.rule h4{font-size:clamp(25.5px,2.2vw,32px);line-height:1.15;letter-spacing:-.025em}
+.letter-card.rule p{margin:0;font-size:15px;line-height:1.65;color:rgba(255,255,255,.75)}
+.letter-card.rule button{align-self:flex-start;padding:9px 16px;border:none;border-radius:8px;background:var(--sage-glow);color:var(--navy);font-weight:700;cursor:pointer}
+.sub-rail{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin:0 0 22px;position:relative}
+.sub-rail::before{content:"";position:absolute;left:7%;right:7%;top:50%;height:2px;background:var(--line-2);transform:translateY(-50%)}
+.sub-rail a{position:relative;display:grid;place-items:center;justify-self:center;width:46px;height:46px;border-radius:50%;font-weight:700;font-size:19.5px;text-decoration:none;color:#fff;box-shadow:0 0 0 5px var(--page);transition:transform .15s ease}
+.sub-rail a:hover{transform:scale(1.08)}
+.sub-names{display:grid;grid-template-columns:repeat(7,1fr);margin:-8px 0 26px;font-size:12.5px;font-weight:600;text-align:center;color:var(--muted)}
+.overlap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ov{border:1px solid var(--line);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow);overflow:hidden}
+.ov-pair{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:14px;border-bottom:1px solid var(--line);background:#FAFAF7}
+.ov-pair .a,.ov-pair .b{padding:8px 10px;border-radius:8px;font-weight:700;font-size:15px;text-align:center;line-height:1.2}
+.ov-pair .a{background:var(--indigo-tint);color:var(--indigo-ink)}.ov-pair .b{background:var(--coral-tint);color:var(--coral-ink)}
+.ov-pair i{font-style:normal;font-weight:700;font-size:18.5px;color:var(--muted)}
+.ov p{margin:0;padding:14px 16px 16px;font-size:14.5px;line-height:1.65}
+.rubric{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.rb{padding:16px 14px;border-right:1px solid rgba(27,34,54,.06)}
+.rb:last-child{border-right:none}
+.rb b{display:block;font-size:32px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.rb strong{display:block;margin-top:8px;font-size:14.5px}
+.rb span{display:block;margin-top:4px;font-size:13px;line-height:1.5;opacity:.85}
+.rb0{background:#FFFFFF}.rb1{background:#F2F4FC}.rb2{background:#E1E6F9}.rb3{background:#C9D1F3}.rb4{background:#8E9DE0;color:#fff}.rb5{background:var(--indigo);color:#fff}
+.math{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}
+.math .card{padding:20px}
+.math h4{font-size:19.5px;letter-spacing:-.015em;margin-bottom:8px}
+.math p{margin:0;font-size:14.5px;line-height:1.65}
+.formula{margin:12px 0;padding:10px 12px;border-radius:8px;background:var(--navy);color:var(--sage-glow);font-weight:600;font-size:14.5px;line-height:1.5;font-family:'SF Mono',Menlo,Consolas,monospace}
+.wchart{margin-top:22px;padding:22px 24px}
+.wrow{display:grid;grid-template-columns:140px 1fr 56px;gap:12px;align-items:center;padding:4px 0;font-size:14.5px}
+.wtrack{display:block;height:14px;position:relative}
+.wbar{position:absolute;left:0;top:0;bottom:0;border-radius:0 4px 4px 0}
+.wbar.meddic{background:var(--indigo)}.wbar.sandler{background:var(--coral)}
+.wval{text-align:right;font-weight:700}
+.quiz{padding:28px;border-radius:var(--r);background:var(--navy);color:#fff;box-shadow:var(--shadow)}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.quiz-top .score{padding:4px 12px;border-radius:999px;background:rgba(195,216,138,.16);color:var(--sage-glow);font-weight:700;font-size:14px}
+.quiz-q{font-size:clamp(19.5px,1.9vw,25.5px);font-weight:600;line-height:1.4;letter-spacing:-.01em;max-width:900px}
+.quiz-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.quiz-opts button{padding:15px 16px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:var(--navy-2);color:#fff;font-weight:600;font-size:16.5px;cursor:pointer;text-align:left;transition:background .15s ease,border-color .15s ease}
+.quiz-opts button:hover:not(:disabled),.quiz-opts button:focus-visible{background:var(--navy-3);border-color:rgba(255,255,255,.35);outline:none}
+.quiz-opts button.right{background:var(--sage-tint);color:var(--sage-ink);border-color:var(--sage)}
+.quiz-opts button.wrong{background:var(--coral-tint);color:var(--coral-ink);border-color:var(--coral)}
+.quiz-opts button:disabled{cursor:default}
+.quiz-fb{min-height:44px;margin-top:16px;font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.8)}
+.quiz-next{margin-top:8px;padding:9px 18px;border:none;border-radius:8px;background:var(--sage-glow);color:var(--navy);font-weight:700;cursor:pointer}
+.foot{padding-top:28px;padding-bottom:40px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+
+#tip{position:fixed;z-index:9999;max-width:280px;padding:9px 11px;border-radius:8px;background:var(--navy);color:#fff;box-shadow:0 8px 24px rgba(27,34,54,.25);font-size:14px;line-height:1.5;pointer-events:none}
+#tip[hidden]{display:none}
+
+@media(max-width:980px){
+  .route,.stats,.prios,.letters,.overlap,.math{grid-template-columns:1fr 1fr}
+  .flow{grid-template-columns:1fr}.flow-arrow{transform:rotate(90deg)}
+  .bars-grid{grid-template-columns:1fr}
+  .quiz-opts{grid-template-columns:1fr}
+  .rubric{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:680px){
+  .route,.stats,.prios,.letters,.overlap,.math,.bands{grid-template-columns:1fr}
+  .sec-head{display:block}.sec-head p{margin-top:12px}
+  .versus{grid-template-columns:1fr}
+  .vs-card dl{grid-template-columns:1fr}
+  .bar-row{grid-template-columns:104px 1fr 40px}
+  .wrow{grid-template-columns:100px 1fr 46px}
+  .rubric{grid-template-columns:1fr 1fr}
+  .sub-rail a{width:34px;height:34px;font-size:16px}
+  .sub-names{font-size:10.5px}
+  .page-head::after{display:none}
+  nav.tabs{margin-left:0}
+  .profile-top,.profile-body{padding:20px 18px}
+}
+
+/* ── coached top 3 (v3) ── */
+.rule-note{max-width:820px;margin:-4px 0 18px;font-size:14.5px;line-height:1.6;color:var(--muted)}
+.coach-card{margin-bottom:18px;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow);overflow:hidden}
+.coach-card.c0{--c:var(--coral);--t:var(--coral-tint);--k:var(--coral-ink)}.coach-card.c1{--c:var(--indigo);--t:var(--indigo-tint);--k:var(--indigo-ink)}.coach-card.c2{--c:var(--sage);--t:var(--sage-tint);--k:var(--sage-ink)}
+.coach-card header{display:flex;align-items:center;gap:16px;padding:16px 20px;background:var(--t)}
+.coach-card .n{font-size:39px;font-weight:700;line-height:1;color:var(--c);min-width:56px}
+.coach-title h3{font-size:24px;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.facts{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:6px;font-size:14px;color:var(--muted)}
+.coach-card .why{margin:0;padding:14px 20px;border-bottom:1px solid var(--line);font-size:15px;line-height:1.65}
+.coach-card .why b:first-child{color:var(--k)}
+.coach-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;padding:18px 20px 20px}
+.coach-grid h5,.dim-body2 h5{margin:14px 0 6px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.coach-grid > div > h5:first-child{margin-top:0}
+.coach-grid p{margin:0;font-size:14.5px;line-height:1.65}
+.pattern{margin-bottom:10px!important}
+.call{margin-top:10px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#FBFAF7}
+.call.good{background:var(--sage-tint);border-color:#DCE7C2}
+.call-meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:6px}
+.call-score{margin-left:auto;padding:1px 8px;border-radius:999px;font-weight:700}
+.call-score.s0,.call-score.s1{background:var(--weak-tint);color:var(--weak-ink)}.call-score.s2,.call-score.s3{background:var(--building-tint);color:var(--building-ink)}.call-score.s4,.call-score.s5{background:var(--strong-tint);color:var(--strong-ink)}
+.call-what{font-size:14.5px;line-height:1.6}
+.call-note{margin-top:8px!important;padding-top:8px;border-top:1px dashed var(--line-2);font-size:14.5px;line-height:1.6}
+.call-note b{display:block;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--indigo-ink);margin-bottom:2px}
+.hint{margin-top:6px!important;font-size:13px!important;color:var(--muted)}
+.drill{padding:10px 12px;border-radius:8px;background:var(--amber-tint);color:#5E3F0E}
+ul.asks{margin:0;padding-left:18px}ul.asks li{font-size:14.5px;line-height:1.6;margin-bottom:4px}
+/* rest rows */
+details.dim summary{display:grid;grid-template-columns:auto minmax(170px,auto) auto auto 1fr auto;align-items:center;gap:10px 14px}
+details.dim summary::after{grid-column:6}
+.dim-name{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:600}
+.dim-rank{font-size:14px;color:var(--muted);white-space:nowrap}
+.dim-delta{font-size:14px;font-weight:700;white-space:nowrap}.dim-delta.up{color:var(--strong-ink)}.dim-delta.down{color:var(--weak-ink)}
+.dim-verdict{font-size:14.5px;font-weight:500;color:var(--ink);line-height:1.45}
+.dim-body2 .coach-grid{padding:4px 2px 0}
+.dim-body2{padding:14px 16px 16px}
+.measures{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:14px;line-height:1.6;color:var(--muted)}
+@media(max-width:860px){
+  .coach-grid{grid-template-columns:1fr}
+  details.dim summary{grid-template-columns:auto 1fr auto}
+  details.dim summary::after{grid-column:3;grid-row:1}
+  .dim-rank,.dim-delta{grid-column:2}
+  .dim-verdict{grid-column:1/-1}
+}
+
+/* ── Start Here and 101 openers: the original bright v1 look, scoped with .bright ── */
+.bright .hero{background:#141B2D}
+.bright .hero::before{background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px)}
+.bright .hero::after{display:none}
+.bright .eyebrow{color:#D9FF43;font-size:12px;font-weight:800;letter-spacing:.16em}
+.bright .live-dot{width:8px;height:8px;background:#D9FF43;box-shadow:0 0 0 5px rgba(217,255,67,.14)}
+.bright .hero h1{max-width:1020px;font-size:clamp(46px,7vw,115px);line-height:.9;letter-spacing:-.06em;font-weight:800}
+.bright .hero h1 em{color:#D9FF43}
+.bright .hero-copy{max-width:700px;margin-top:26px;color:rgba(255,255,255,.76);font-size:clamp(16px,1.45vw,20.5px);line-height:1.55}
+.bright .route{gap:14px;margin-top:40px}
+.bright .route button{min-height:150px;padding:20px;border:2px solid #141B2D;border-radius:0;color:#141B2D;transition:transform .2s ease,box-shadow .2s ease}
+.bright .route button:nth-child(1){background:#FF6D55}.bright .route button:nth-child(2){background:#3B5BDB;color:#fff}.bright .route button:nth-child(3){background:#D9FF43}
+.bright .route button:hover,.bright .route button:focus-visible{transform:translate(-4px,-4px);box-shadow:9px 9px 0 #fff;background-image:none;outline:none}
+.bright .route small{margin-bottom:22px;font-size:11px;font-weight:800;letter-spacing:.13em;color:inherit;opacity:.75;filter:none}
+.bright .route strong{max-width:270px;font-size:clamp(23px,2.2vw,34.5px);line-height:.98;letter-spacing:-.035em;font-weight:800}
+.bright .route b{right:17px;bottom:13px;font-size:28.5px;font-weight:700;color:inherit}
+.bright .route button:hover b{transform:translate(4px,-4px)}
+.bright .marquee{padding:15px 0;background:#E67700;border-top:2px solid #141B2D;border-bottom:2px solid #141B2D;color:#141B2D;font-size:14px;font-weight:900;letter-spacing:.08em}
+.bright .marquee span{animation-duration:16s}
+.bright .marquee b{color:#141B2D;font-weight:900}
+
+/* ── v4: framework panels in 101 (sizes already at the larger v4 scale) ── */
+.fw-panel{position:relative;margin:28px 0;padding-top:46px!important;padding-bottom:46px!important;background:var(--t);border-top:6px solid var(--c)}
+.fw-meddic{--c:var(--indigo);--t:#F1F3FC;--k:var(--indigo-ink)}.fw-sandler{--c:var(--coral);--t:#FCF3F0;--k:var(--coral-ink)}
+.fw-badge{display:inline-block;margin:0 10px 10px 0;padding:5px 14px;border-radius:8px;background:var(--c);color:#fff;font-size:15px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:middle}
+.fw-panel .kicker{color:var(--k);vertical-align:middle}
+.fw-panel .letter-card{border-top:5px solid var(--c)}
+.fw-panel .big-letter{background:var(--c)!important;color:#fff!important}
+.fw-panel .letter-card.rule .big-letter{background:none}
+.fw-sandler .sub-rail a{background:var(--coral)!important;color:#fff!important}
+.fw-sandler .sub-rail::before{background:#E9C3B8}
+.lc-top .pill{margin-left:6px;vertical-align:2px}
+button.link{padding:0;border:none;background:none;color:var(--indigo);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
+
+/* ── v4: Engine Weights tab ── */
+.ew-explain{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ew-explain .card{padding:22px}
+.ew-n{display:grid;place-items:center;width:34px;height:34px;margin-bottom:14px;border-radius:10px;background:var(--navy);color:var(--sage-glow);font-weight:700;font-size:16px}
+.ew-explain h4{font-size:20px;margin-bottom:8px;letter-spacing:-.015em}
+.ew-explain p{margin:0;font-size:14.5px;line-height:1.65;color:var(--muted)}
+.dumb{padding:22px 26px}
+.dumb-head{display:grid;grid-template-columns:170px 1fr 120px;gap:14px;margin:18px 0 6px;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dumb-head:first-child{margin-top:0}
+.dumb-head .fw-badge{font-size:12.5px;padding:3px 10px;margin:0}
+.dumb-row{display:grid;grid-template-columns:170px 1fr 120px;gap:14px;align-items:center;padding:6px 0;font-size:14.5px}
+.dumb-track{position:relative;height:22px}
+.dumb-track::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--line)}
+.dumb-line{position:absolute;top:50%;height:4px;transform:translateY(-50%);border-radius:2px;background:#C9CDD9}
+.dumb-dot{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 3px var(--paper)}
+.dumb-dot.w{background:var(--weak)}.dumb-dot.s{background:var(--strong)}
+.dumb-val{font-size:13.5px;color:var(--muted);text-align:right;white-space:nowrap}
+.dumb-val b{color:var(--ink)}
+.dumb-axis{display:grid;grid-template-columns:170px 1fr 120px;gap:14px;margin-top:6px;font-size:12px;color:var(--muted)}
+.dumb-axis div{display:flex;justify-content:space-between}
+.ew-group{margin-top:26px}
+.ew-group:first-child{margin-top:0}
+.ew-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:14px}
+.ew-card{padding:20px 22px;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow)}
+.ew-card.meddic{--c:var(--indigo)}.ew-card.sandler{--c:var(--coral)}
+.ew-card header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+.ew-card h4{font-size:20px;letter-spacing:-.015em}
+.ew-card .wt{font-size:24px;font-weight:700;color:var(--c)}
+.ew-card p{margin:0;font-size:14.5px;line-height:1.65}
+.ew-card .ew-stats{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:13px;color:var(--muted)}
+.ew-card .ew-stats b{color:var(--ink)}
+
+/* ── v4: clickable team numbers ── */
+button.stat{display:block;width:100%;font:inherit;color:inherit;text-align:left;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease}
+button.stat:hover,button.stat:focus-visible{transform:translateY(-2px);box-shadow:var(--shadow-hover);outline:none}
+button.stat.open{box-shadow:0 0 0 2px var(--c),var(--shadow-hover)}
+.stat .more{display:block;margin-top:12px;font-size:13px;font-weight:700;color:var(--c);filter:brightness(.8)}
+.stat-detail{margin-top:18px;padding:24px 26px;border:1px solid var(--line);border-top:4px solid var(--c);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow)}
+.stat-detail h3{font-size:22px;letter-spacing:-.02em;margin-bottom:12px}
+.sd-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:28px}
+.sd-grid h5{margin:16px 0 6px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sd-grid h5:first-child{margin-top:0}
+.sd-grid p,.sd-grid li{margin:0;font-size:14.5px;line-height:1.65}
+.sd-grid ul{margin:0;padding-left:20px}
+.sd-bars .bar-row{grid-template-columns:150px 1fr 52px}
+.fix-list{display:grid;gap:8px}
+.fix-row{display:grid;grid-template-columns:170px 1fr;gap:12px;align-items:center;font-size:14.5px}
+.fix-row .pill{justify-self:start}
+
+/* ── v4: heatmap crosshair (no selected-rep highlight) ── */
+table.heat tr.sel td.rep{background:transparent;color:var(--ink)}
+table.heat th.hl{background:var(--navy);color:#fff;border-radius:6px}
+table.heat th.hl .w{color:rgba(255,255,255,.7)}
+table.heat td.rep.hl{background:var(--navy);color:#fff}
+table.heat td.hcell{box-shadow:inset 0 0 0 2px var(--navy)}
+
+#gl-tip{font-size:14.5px!important;max-width:380px!important}
+#gl-tip .gl-tip-term{font-size:15px!important}
+
+@media(max-width:980px){.ew-explain,.ew-grid,.sd-grid{grid-template-columns:1fr}}
+@media(max-width:680px){
+  .dumb-head,.dumb-row,.dumb-axis{grid-template-columns:110px 1fr 84px}
+  .fix-row{grid-template-columns:1fr}
+}
+
+/* ── v5: Build Your Own tab (sizes at the v4 scale) ── */
+.pipe{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;counter-reset:p}
+.pipe-node{position:relative;display:flex;flex-direction:column;padding:18px 16px 16px;border:1px solid var(--line);border-top:4px solid var(--c);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow)}
+.pipe-node:nth-child(1){--c:var(--indigo)}.pipe-node:nth-child(2){--c:var(--navy)}.pipe-node:nth-child(3){--c:var(--coral)}.pipe-node:nth-child(4){--c:var(--amber)}.pipe-node:nth-child(5){--c:var(--sage)}.pipe-node:nth-child(6){--c:var(--indigo)}.pipe-node:nth-child(7){--c:var(--coral)}
+.pipe-node:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:30px;transform:translateX(50%);font-size:18px;color:var(--line-2);z-index:1}
+.pn{display:grid;place-items:center;width:30px;height:30px;margin-bottom:12px;border-radius:9px;background:var(--c);color:#fff;font-weight:700;font-size:14.5px}
+.pipe-node h4{font-size:17px;letter-spacing:-.01em;margin-bottom:6px}
+.pipe-node p{margin:0 0 12px;font-size:13.5px;line-height:1.55;color:var(--muted);flex:1}
+.pipe-out{align-self:flex-start;padding:3px 9px;border-radius:999px;background:var(--page);font-size:12px;font-weight:700;color:var(--ink)}
+.schema-card{padding:0;overflow:hidden}
+.scroll-x{overflow-x:auto}
+table.schema{width:100%;border-collapse:collapse;font-size:13.5px;min-width:1180px}
+table.schema th{padding:10px 12px;text-align:left;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--muted);background:#FAFAF7;border-bottom:1px solid var(--line);white-space:nowrap}
+table.schema td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45}
+table.schema tr.crm td{background:var(--indigo-tint)}
+table.schema td .blank{color:var(--muted);font-style:italic}
+.rk{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:700;white-space:nowrap}
+.rk.crm{background:var(--indigo);color:#fff}.rk.call{background:var(--coral-tint);color:var(--coral-ink)}
+.schema-notes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:20px 22px;border-top:1px solid var(--line)}
+.schema-notes h5{margin:0 0 6px;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.schema-notes p{margin:0;font-size:14.5px;line-height:1.6}
+code{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:.88em;padding:1px 5px;border-radius:4px;background:var(--page);word-break:break-all}
+.walk{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;gap:10px;align-items:stretch}
+.walk-step{padding:18px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow)}
+.wn{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--navy);color:var(--sage-glow);font-weight:700;font-size:13px}
+.walk-step h4{display:inline;margin-left:8px;font-size:16.5px}
+.wb{margin:12px 0 8px;font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1;color:var(--indigo)}
+.wb small{font-size:15px;color:var(--muted);font-weight:600}
+.walk-step p{margin:0;font-size:13.5px;line-height:1.6}
+.walk-arrow{display:grid;place-items:center;color:var(--line-2);font-size:20px}
+.prompt-parts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pp{padding:18px;border:1px solid var(--line);border-radius:var(--r);background:var(--paper);box-shadow:var(--shadow)}
+.pp b{display:inline-grid;place-items:center;width:28px;height:28px;margin-bottom:10px;border-radius:8px;background:var(--coral-tint);color:var(--coral-ink);font-size:14px}
+.pp h4{font-size:17px;margin-bottom:6px}.pp p{margin:0;font-size:14px;line-height:1.6;color:var(--muted)}
+.code-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:24px}
+pre.code{margin:0;padding:18px 20px;border-radius:var(--r);background:var(--navy);color:#E6E9F2;font-family:'SF Mono',Menlo,Consolas,monospace;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word;min-height:260px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.check-col{padding:22px 24px}
+.check-col h4{display:flex;align-items:center;gap:10px;font-size:19px;margin-bottom:14px}
+.ck{padding:3px 10px;border-radius:7px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+.ck.t{background:var(--indigo)}.ck.p{background:var(--coral)}
+ul.ticks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ul.ticks li{position:relative;padding-left:28px;font-size:14.5px;line-height:1.55}
+ul.ticks li::before{content:"✓";position:absolute;left:0;top:0;display:grid;place-items:center;width:19px;height:19px;border-radius:50%;background:var(--sage-tint);color:var(--sage-ink);font-size:12px;font-weight:800}
+.lessons{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.lesson{padding:18px;border-radius:var(--r);background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow)}
+.lesson span{font-size:28px;font-weight:700;color:var(--coral);letter-spacing:-.03em}
+.lesson h4{margin:6px 0;font-size:16.5px;line-height:1.25}.lesson p{margin:0;font-size:13.5px;line-height:1.6;color:var(--muted)}
+.weeks{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.week{display:flex;flex-direction:column;padding:18px 16px;border-radius:var(--r);background:var(--paper);border:1px solid var(--line);border-top:4px solid var(--sage);box-shadow:var(--shadow)}
+.week b{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--sage-ink)}
+.week h4{margin:6px 0;font-size:16.5px;line-height:1.25}.week p{margin:0 0 12px;font-size:13.5px;line-height:1.55;color:var(--muted);flex:1}
+.week .done{font-size:12.5px;font-weight:600;line-height:1.45;padding:7px 9px;border-radius:7px;background:var(--sage-tint);color:var(--sage-ink)}
+.need{margin-top:22px;padding:22px 24px}
+.need h4{font-size:19px;margin-bottom:14px}
+.need-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 26px}
+.need-grid b{display:block;font-size:15px}.need-grid span{font-size:14px;color:var(--muted);line-height:1.55}
+@media(max-width:1180px){.pipe{grid-template-columns:repeat(4,1fr)}.pipe-node::after{display:none}.weeks{grid-template-columns:repeat(3,1fr)}.lessons{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:980px){.walk{grid-template-columns:1fr}.walk-arrow{transform:rotate(90deg)}.code-pair,.checks,.schema-notes{grid-template-columns:1fr}.prompt-parts,.need-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.pipe,.weeks,.lessons,.prompt-parts,.need-grid{grid-template-columns:1fr}}
+
+/* ── v8: flow tree (splits and joins) at the top of Build Your Own ── */
+.tree-card{padding:24px 26px;overflow-x:auto}
+svg.flow{display:block;width:100%;min-width:860px;height:auto;max-width:1180px;margin:0 auto}
+.fn-box{fill:var(--paper);stroke:var(--line-2);stroke-width:1.2}
+.fn-t{font-size:15px;font-weight:700;fill:var(--ink)}
+.fn-s{font-size:12.5px;fill:var(--muted)}
+.fe{fill:none;stroke:#B9B6AC;stroke-width:1.8;stroke-linejoin:round}
+.fa-head{fill:#B9B6AC}
+.fnode.link{cursor:pointer}
+.fnode.link:hover .fn-box,.fnode.link:focus-visible .fn-box{fill:var(--page);stroke:var(--ink)}
+.fnode.link:focus{outline:none}
+/*__GLOSSARY_CSS__*/
+</style>
+</head>
+<body>
+<div class="topbar wrap">
+  <div class="brand"><span class="brand-mark">{{INITIAL}}</span>{{COMPANY}} <small>Rep Coaching</small></div>
+  <nav class="tabs" id="tabs" aria-label="Sections">
+    <button type="button" data-tab="start" class="active">Start Here</button>
+    <button type="button" data-tab="frameworks">MEDDIC &amp; Sandler 101</button>
+    <button type="button" data-tab="weights">Engine Weights</button>
+    <button type="button" data-tab="team">Team Summary</button>
+    <button type="button" data-tab="coaching">Rep Coaching</button>
+    <button type="button" data-tab="build">Build Your Own</button>
+  </nav>
+</div>
+<main>
+
+<!-- ═════════════ START HERE ═════════════ -->
+<section id="tab-start" class="tab-panel active bright">
+  <div class="hero opener wrap">
+    <p class="eyebrow"><span class="live-dot"></span><span id="start-eyebrow">Rep coaching system</span></p>
+    <h1>Coach the one skill<br>that <em>wins the deal.</em></h1>
+    <p class="hero-copy">We score every rep&#39;s calls and emails against two sales frameworks, MEDDIC and Sandler, so all 13 dimensions of both get covered. The scores show where each rep is weak, and that is exactly what we coach them on.</p>
+    <div class="route" aria-label="Where to go next">
+      <button type="button" data-go="coaching"><small>01 / PICK A REP</small><strong>Open one rep's coaching plan</strong><b>↗</b></button>
+      <button type="button" data-go="frameworks"><small>02 / LEARN THE LANGUAGE</small><strong>What MEDDIC and Sandler actually mean</strong><b>↗</b></button>
+      <button type="button" data-go="team"><small>03 / FIND THE TEAM GAP</small><strong>See the skill the whole team is missing</strong><b>↗</b></button>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true"><span>LISTEN TO THE CALL <b>→</b> SCORE 13 SKILLS <b>→</b> FIND THE COSTLIEST GAP <b>→</b> PRACTISE ONE THING <b>→</b> REPEAT <b>·</b></span><span>LISTEN TO THE CALL <b>→</b> SCORE 13 SKILLS <b>→</b> FIND THE COSTLIEST GAP <b>→</b> PRACTISE ONE THING <b>→</b> REPEAT <b>·</b></span><span>LISTEN TO THE CALL <b>→</b> SCORE 13 SKILLS <b>→</b> FIND THE COSTLIEST GAP <b>→</b> PRACTISE ONE THING <b>→</b> REPEAT <b>·</b></span></div>
+</section>
+
+<!-- ═════════════ MEDDIC & SANDLER 101 ═════════════ -->
+<section id="tab-frameworks" class="tab-panel bright">
+  <div class="hero wrap">
+    <p class="eyebrow"><span class="live-dot"></span>The language of coaching</p>
+    <h1>Two playbooks.<br>Thirteen skills.<br><em>One question.</em></h1>
+    <p class="hero-copy">Will this deal close? MEDDIC and Sandler are two of the most widely used methods in business-to-business sales. MEDDIC checks the buyer's side: do we know enough to call this deal real? Sandler checks the seller's side: are we running the conversation the right way? {{COMPANY}} scores every call on both.</p>
+  </div>
+  <div class="marquee" aria-hidden="true"><span>M · E · D · D · I · C <b>✦</b> RAPPORT <b>→</b> UPFRONT CONTRACT <b>→</b> PAIN <b>→</b> BUDGET <b>→</b> DECISION <b>→</b> FULFILLMENT <b>→</b> POSTSELL <b>✦</b></span><span>M · E · D · D · I · C <b>✦</b> RAPPORT <b>→</b> UPFRONT CONTRACT <b>→</b> PAIN <b>→</b> BUDGET <b>→</b> DECISION <b>→</b> FULFILLMENT <b>→</b> POSTSELL <b>✦</b></span><span>M · E · D · D · I · C <b>✦</b> RAPPORT <b>→</b> UPFRONT CONTRACT <b>→</b> PAIN <b>→</b> BUDGET <b>→</b> DECISION <b>→</b> FULFILLMENT <b>→</b> POSTSELL <b>✦</b></span></div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">Side by side</span><h2>One looks at the buyer. One looks at you.</h2></div><p>They are not rivals. A rep can run a perfect Sandler call and still lose because nobody found the person who signs. Scoring both catches that.</p></div>
+    <div class="versus">
+      <div class="vs-card m">
+        <h3>MEDDIC</h3>
+        <p class="q">"Is this deal real?"</p>
+        <dl>
+          <dt>What it is</dt><dd>A checklist of six facts about the buyer. Each letter is one fact the rep must find out.</dd>
+          <dt>Where from</dt><dd>Built at the software company PTC in the 1990s to make sales forecasts more honest.</dd>
+          <dt>Think of it as</dt><dd>A detective's case file. Missing evidence means the case isn't closed.</dd>
+          <dt>Fails when</dt><dd>The rep has a friendly contact but no numbers, no signer and no process.</dd>
+        </dl>
+      </div>
+      <div class="vs-mid" aria-hidden="true"><span>VS</span></div>
+      <div class="vs-card s">
+        <h3>Sandler</h3>
+        <p class="q">"Am I selling it right?"</p>
+        <dl>
+          <dt>What it is</dt><dd>Seven steps the seller works through in order, from building trust to locking the next step.</dd>
+          <dt>Where from</dt><dd>Created by sales trainer David Sandler in the late 1960s.</dd>
+          <dt>Think of it as</dt><dd>A submarine: seal each compartment before moving to the next, or the whole thing floods.</dd>
+          <dt>Fails when</dt><dd>The rep pitches before finding pain, or ends a great call with "I'll send some info".</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="section wrap fw-panel fw-meddic" id="meddic">
+    <div class="sec-head"><div><span class="fw-badge m">MEDDIC</span><span class="kicker">6 facts about the buyer</span><h2>Six letters that tell you if a deal is real.</h2></div><p>Each card shows what the letter means, the question that uncovers it, and what a score of 1, 3 and 5 sounds like on a real call.</p></div>
+    <div class="letters" id="meddic-cards"></div>
+  </div>
+
+  <div class="section wrap fw-panel fw-sandler" id="sandler">
+    <div class="sec-head"><div><span class="fw-badge s">Sandler</span><span class="kicker">7 steps for the seller</span><h2>Seven compartments. Seal each one.</h2></div><p>The steps run in order. Skipping ahead, like talking price before pain, is the most common way a promising call goes nowhere.</p></div>
+    <div class="sub-rail" id="sub-rail"></div>
+    <div class="sub-names" id="sub-names" aria-hidden="true"></div>
+    <div class="letters" id="sandler-cards"></div>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">Same word, different question</span><h2>Where the two playbooks overlap.</h2></div><p>Three pairs sound alike. They are scored separately because they catch different mistakes.</p></div>
+    <div class="overlap" id="overlap"></div>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">How a score is made</span><h2>From one call to a coaching priority.</h2></div><p>Four steps turn a conversation into a number a manager can act on.</p></div>
+    <p class="label">Step 1 · Every call gets a 0–5 on every skill</p>
+    <div class="rubric">
+      <div class="rb rb0"><b>0</b><strong>Absent</strong><span>Never came up.</span></div>
+      <div class="rb rb1"><b>1</b><strong>Trace</strong><span>A passing mention, nothing specific.</span></div>
+      <div class="rb rb2"><b>2</b><strong>Partial</strong><span>Discussed, but stayed generic. No name, no number.</span></div>
+      <div class="rb rb3"><b>3</b><strong>Substantive</strong><span>At least one hard detail, confirmed by the buyer.</span></div>
+      <div class="rb rb4"><b>4</b><strong>Strong</strong><span>Several confirmed specifics: names, figures, dates.</span></div>
+      <div class="rb rb5"><b>5</b><strong>Nailed</strong><span>Fully qualified by the method's own definition.</span></div>
+    </div>
+    <div class="math">
+      <div class="card"><h4>Step 2 · Combine call and email</h4><p>The call score and the email score for the same deal merge into one score out of 10. When both sources show the skill, the combined score climbs higher than either alone.</p><div class="formula">combined = (1 − (1 − call ÷ 5) × (1 − email ÷ 5)) × 10</div><p>A rep's score on a skill is the average of that combined number across all their deals.</p></div>
+      <div class="card"><h4>Step 3 · Weigh each skill</h4><p>Not every skill moves the result equally. The <strong>engine weight</strong> says how much one extra point on a skill raises the predicted chance of winning. The <button type="button" class="link" data-go="weights">Engine Weights tab</button> explains where each weight comes from.</p><div class="formula" id="weight-example"></div></div>
+      <div class="card"><h4>Step 4 · Rank the gaps, per rep</h4><p>Three things decide a skill's place on a rep's list: its engine weight, how far the rep is from a perfect 10, and the rep's rank on the team. Squaring the rank makes being near the bottom of the team count most.</p><div class="formula">priority = weight × (10 − score) × (team rank ÷ 11)²</div><p id="prio-example"></p></div>
+    </div>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">Test yourself</span><h2>Name that skill.</h2></div><p>Each round describes what a perfect score of 5 looks like on a real call. Pick the skill it belongs to.</p></div>
+    <div class="quiz" id="quiz"></div>
+  </div>
+</section>
+<!-- ═════════════ ENGINE WEIGHTS ═════════════ -->
+<section id="tab-weights" class="tab-panel">
+  <div class="page-head wrap">
+    <span class="kicker">Engine Weights</span>
+    <h1>Which skills actually win deals at {{COMPANY}}?</h1>
+    <p>Every skill gets an engine weight: a number that says how much that skill moves the chance of winning a deal. This tab shows the closed deals behind the weights, how often each skill went with a win, and why each one tends to matter.</p>
+  </div>
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">The idea in one minute</span><h2>Not every skill is worth the same.</h2></div></div>
+    <div class="ew-explain">
+      <div class="card"><span class="ew-n">1</span><h4>What it is</h4><p>An engine weight is the share of a framework&#39;s win prediction that comes from one skill. Inside each framework the weights add up to 100. A big weight means that skill decides a lot of deals.</p></div>
+      <div class="card"><span class="ew-n">2</span><h4>How it was learned</h4><p id="ew-how">Each skill&#39;s weight comes from how much higher it scored on deals that were won than on deals that were lost. A skill that barely differs gets little weight; one that scored higher on lost deals gets none.</p></div>
+      <div class="card"><span class="ew-n">3</span><h4>How to read it</h4><p id="ew-rule">Rule of thumb: one extra point on a skill (out of 10) adds about <strong>weight ÷ 10</strong> percentage points to the chance of winning.</p></div>
+    </div>
+  </div>
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">The past data</span><h2 id="ew-title">Closed deals.</h2></div><p id="ew-source"></p></div>
+    <div class="stats" id="ew-kpis"></div>
+  </div>
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">Strong versus weak</span><h2>When a skill was strong, how often did {{COMPANY}} win?</h2></div><p>Each row compares deals where the skill was weak (under 4 out of 10) with deals where it was strong (6 and up). The wider the gap, the bigger the weight.</p></div>
+    <div class="card dumb" id="ew-dumbbell"></div>
+  </div>
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">The weights</span><h2>All 13 engine weights, biggest first.</h2></div></div>
+    <div class="card wchart">
+      <div id="wchart"></div>
+      <div class="legend"><span><i style="background:var(--indigo)"></i>MEDDIC</span><span><i style="background:var(--coral)"></i>Sandler</span></div>
+    </div>
+  </div>
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">The logic</span><h2>Why each skill tends to matter.</h2></div><p>The weights come from your own deals. The notes explain why each skill tends to decide B2B deals; tailor them in content.json.</p></div>
+    <div id="ew-cards"></div>
+  </div>
+</section>
+
+<!-- ═════════════ TEAM SUMMARY ═════════════ -->
+<section id="tab-team" class="tab-panel">
+  <div class="page-head wrap">
+    <span class="kicker">Team Summary</span>
+    <h1>Where the team stands today.</h1>
+    <p>The team&#39;s averages and every rep against every skill in one grid. Read this before any 1:1.</p>
+  </div>
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">The team today</span><h2>Four numbers worth knowing before any 1:1.</h2></div><p>Click a number to see what it means for the team and what to do about it.</p></div>
+    <div class="stats" id="start-stats"></div>
+    <div class="stat-detail" id="stat-detail" hidden></div>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">Reading a score</span><h2>Three colours. That's the whole key.</h2></div><p>The same bands appear on every bar, tile and table in this app, and the number is always printed beside the colour.</p></div>
+    <div class="bands">
+      <div class="band weak"><b>Under 4</b><span>Weak. The skill rarely shows up. This is where coaching pays back fastest.</span></div>
+      <div class="band building"><b>4 to 6</b><span>Building. It happens, but not every time and not in depth.</span></div>
+      <div class="band strong"><b>6 and up</b><span>Strong. A reliable habit. Protect it and teach it to others.</span></div>
+    </div>
+  </div>
+
+  <div class="section wrap" id="team-grid">
+    <div class="sec-head"><div><span class="kicker">The team at a glance</span><h2>Every rep, every skill, one grid.</h2></div></div>
+    <div class="heat-wrap"><table class="heat" id="heat"></table></div>
+    <div class="legend"><span><i style="background:var(--weak)"></i>Under 4 · weak</span><span><i style="background:var(--building)"></i>4–6 · building</span><span><i style="background:var(--strong)"></i>6+ · strong</span><span>Under each skill: its engine weight, how much it moves the odds of winning</span></div>
+  </div>
+
+</section>
+
+<!-- ═════════════ REP COACHING ═════════════ -->
+<section id="tab-coaching" class="tab-panel">
+  <div class="page-head wrap">
+    <span class="kicker">Rep Coaching</span>
+    <h1>Who needs coaching, and on what?</h1>
+    <p>Pick a rep to see their 13 skill scores, the three gaps worth the most deals, and exactly what to practise. The dark tick on each bar marks the team average.</p>
+  </div>
+  <div class="section wrap">
+    <p class="label">Pick a rep</p>
+    <div class="picker" id="picker"></div>
+    <div class="profile card" id="profile"></div>
+  </div>
+</section>
+
+<!-- ═════════════ BUILD YOUR OWN ═════════════ -->
+<section id="tab-build" class="tab-panel">
+  <div class="page-head wrap">
+    <span class="kicker">Build Your Own</span>
+    <h1>How to build a system like this.</h1>
+    <p>Everything in this app comes from one pipeline: recorded calls, CRM deals and email threads go in, and a coached plan for every rep comes out. This tab walks through how to build that pipeline, step by step, using {{COMPANY}}&#39;s own data as the example.</p>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">Everything at a glance</span><h2>The system as a tree.</h2></div><p>Read it left to right. Three inputs join into one table, scoring splits into MEDDIC and Sandler, the two join again, and the result splits into the two coaching views. Boxes with an arrow open that tab.</p></div>
+    <div class="card tree-card" id="tree" data-gl-skip></div>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">The order things happen</span><h2>Seven stages, always in the same order.</h2></div><p>Each stage reads what the stage before it wrote. If a stage fails its checks, the chain stops, so a bad number never reaches a rep.</p></div>
+    <div class="pipe" id="pipe">
+      <div class="pipe-node"><span class="pn">1</span><h4>Collect</h4><p>Call transcripts from the call recorder, deal records from the CRM, and every email thread on each deal.</p><span class="pipe-out">Raw files</span></div>
+      <div class="pipe-node"><span class="pn">2</span><h4>One master table</h4><p>One row per deal from the CRM, plus one row per call. Every later stage reads and writes this table.</p><span class="pipe-out">Master table</span></div>
+      <div class="pipe-node"><span class="pn">3</span><h4>Score each call</h4><p>An AI model reads each transcript and scores all 13 skills from 0 to 5, with a reason and a coaching note for each.</p><span class="pipe-out">13 scores per call</span></div>
+      <div class="pipe-node"><span class="pn">4</span><h4>Score the emails</h4><p>The same scoring rules run on each deal&#39;s email thread, so calls and emails can be compared fairly.</p><span class="pipe-out">13 scores per deal</span></div>
+      <div class="pipe-node"><span class="pn">5</span><h4>Combine and roll up</h4><p>Call and email scores merge into one 0–10 score per skill per deal, then average into one profile per rep.</p><span class="pipe-out">Rep × skill grid</span></div>
+      <div class="pipe-node"><span class="pn">6</span><h4>Weigh and rank</h4><p>Closed deals teach the engine weights. Each rep&#39;s gaps are ranked into a personal top three.</p><span class="pipe-out">Coaching plans</span></div>
+      <div class="pipe-node"><span class="pn">7</span><h4>Check and publish</h4><p>Automatic checks run on the table and on the finished page. Only then does the dashboard update.</p><span class="pipe-out">This app</span></div>
+    </div>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">The table at the heart of it</span><h2>One master table. Two kinds of row.</h2></div><p>Everything else is built from this table, so its rules matter most. Below is what three {{COMPANY}} rows look like, with most of the 13 skills hidden to keep it readable.</p></div>
+    <div class="card schema-card">
+      <div class="scroll-x"><table class="schema" id="schema-table"></table></div>
+      <div class="schema-notes">
+        <div><h5>The key</h5><p>Each row is identified by <b>deal ID + call date</b>. A deal has exactly one CRM row (call date left blank) and one extra row for every call. The same key twice means a duplicate, and the write is refused.</p></div>
+        <div><h5>Three columns per skill</h5><p>Every skill has a <b>score</b> (a whole number, 0–5), a <b>reason</b> (what happened on the call) and a <b>coaching note</b> (what to do next time). The coaching cards on the Rep Coaching tab quote these two text columns.</p></div>
+        <div><h5>Attach each call to its deal</h5><p>Put the deal ID in every transcript&#39;s file name, for example <code>call-transcript--pricing-review--BW-7Q2K4M.txt</code>. A call with no deal yet gets a "potential" row, which is joined to the real deal once one exists.</p></div>
+      </div>
+    </div>
+
+    <p class="label" style="margin-top:34px">From one call to one cell in the team grid</p>
+    <div class="walk" id="walk"></div>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">The scoring prompt</span><h2>One written prompt does the reading.</h2></div><p>The AI model gets the same instructions for every call. Most of the quality of the whole system comes from how carefully this prompt is written.</p></div>
+    <div class="prompt-parts">
+      <div class="pp"><b>1</b><h4>Role and input</h4><p>Who the model is, what a {{COMPANY}} sales call is, and the transcript itself.</p></div>
+      <div class="pp"><b>2</b><h4>Theme rule</h4><p>Reuse labels from an approved list, word for word, so charts count identical words instead of near-duplicates.</p></div>
+      <div class="pp"><b>3</b><h4>Evidence rule</h4><p>Every score needs a short quote or paraphrase from the transcript. A reason that could be written without reading the call is a failed answer.</p></div>
+      <div class="pp"><b>4</b><h4>One scoring scale</h4><p>The same 0–5 scale for every skill, with a plain definition of each step. Scores stay comparable across skills and across calls.</p></div>
+      <div class="pp"><b>5</b><h4>A block per skill</h4><p>For each of the 13: the question, what to listen for, and an example of a 1, a 3 and a 5.</p></div>
+      <div class="pp"><b>6</b><h4>Output format</h4><p>Exact field names, whole numbers only, and what to write when the evidence is missing.</p></div>
+    </div>
+    <div class="code-pair">
+      <div><p class="label">Part 5 for one skill · what the model reads</p><pre class="code" id="prompt-sample"></pre></div>
+      <div><p class="label">What comes back for one call</p><pre class="code" id="output-sample"></pre></div>
+    </div>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">Safety checks</span><h2>Nothing reaches a rep until it passes.</h2></div><p>Two sets of checks run on every refresh. The first checks the table. The second checks the finished page. Any failure stops the update.</p></div>
+    <div class="checks">
+      <div class="card check-col"><h4><span class="ck t">Table</span>Before the dashboard is built</h4><ul class="ticks">
+        <li><b>No duplicate keys.</b> Deal ID + call date appears once.</li>
+        <li><b>Scores are whole numbers from 0 to 5.</b> Never "2.0" or "2.5".</li>
+        <li><b>Every call belongs to the right deal.</b> The AI&#39;s summary must name the account the file name points to; if not, the call is skipped and flagged.</li>
+        <li><b>Rep names come from one roster file,</b> with nicknames mapped to one spelling.</li>
+        <li><b>Deleted deals stay deleted.</b> Removals are logged, and a logged deal that reappears fails the check.</li>
+        <li><b>No CRM row goes missing</b> unless someone approved it.</li>
+      </ul></div>
+      <div class="card check-col"><h4><span class="ck p">Page</span>Before anyone sees it</h4><ul class="ticks">
+        <li><b>Every tab draws.</b> Count the rows, cards and charts on each tab.</li>
+        <li><b>No script errors</b> in the browser console.</li>
+        <li><b>Screenshot every tab</b> and look at it. A page can pass every test and still be blank.</li>
+        <li><b>Spot-check a few known numbers</b> against the table.</li>
+        <li><b>When a feature is removed,</b> remove its test in the same change, or the stale test blocks every refresh after it.</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">Lessons learned the hard way</span><h2>Eight rules worth knowing before you start.</h2></div></div>
+    <div class="lessons">
+      <div class="lesson"><span>01</span><h4>Count deals, not rows</h4><p>One deal has many rows, one per call. Merge by deal ID before any total, or the pipeline can look twice its real size.</p></div>
+      <div class="lesson"><span>02</span><h4>Never rebuild the table from scratch</h4><p>Change only the deals that changed, and copy the table to a backup folder before every write. A full rebuild can quietly drop columns other stages depend on.</p></div>
+      <div class="lesson"><span>03</span><h4>Whole numbers, always</h4><p>A score saved as the text "2.0" can break the reader downstream and make a rep&#39;s scores disappear without any error. Read loosely, write strictly.</p></div>
+      <div class="lesson"><span>04</span><h4>Watch for double recordings</h4><p>The same call can be captured twice under two titles. Compare date, length and wording, and record the copy as a duplicate rather than loosening the key check.</p></div>
+      <div class="lesson"><span>05</span><h4>Fast model for volume, strong model for judgement</h4><p>Use a fast, low-cost AI model for the per-call and per-thread scoring. Save a stronger model for one-off summaries a manager will read.</p></div>
+      <div class="lesson"><span>06</span><h4>Keep the computer awake</h4><p>A laptop that sleeps halfway through a run looks exactly like a slow AI service. Check for sleep before blaming anything else.</p></div>
+      <div class="lesson"><span>07</span><h4>One source of truth for each fact</h4><p>One roster file for reps, one schema file for columns, one template for the dashboard. Edit the source, never a copy.</p></div>
+      <div class="lesson"><span>08</span><h4>Automate only what passes</h4><p>A watcher waits until new files stop arriving, runs the stages in order, and marks a run done only when every check passes.</p></div>
+    </div>
+  </div>
+
+  <div class="section wrap">
+    <div class="sec-head"><div><span class="kicker">The build plan</span><h2>Six weeks from nothing to a working system.</h2></div><p>Each week ends with something you can open and check. Don&#39;t start the next week until this one&#39;s check passes.</p></div>
+    <div class="weeks">
+      <div class="week"><b>Week 1</b><h4>Collect and build the table</h4><p>Export deals from the CRM, transcripts from the call recorder, and email threads per deal. Build the master table with its key and backups.</p><span class="done">Done when: every call sits on the right deal.</span></div>
+      <div class="week"><b>Week 2</b><h4>Write and test the prompt</h4><p>Draft the scoring prompt. Score 20 calls by hand, run the model on the same 20, and fix the prompt until the two agree.</p><span class="done">Done when: model and human are within one point on most skills.</span></div>
+      <div class="week"><b>Week 3</b><h4>Score everything</h4><p>Run the prompt over every call and every email thread. Combine them into 0–10 per skill per deal.</p><span class="done">Done when: every deal with a call has 13 combined scores.</span></div>
+      <div class="week"><b>Week 4</b><h4>Learn the weights</h4><p>Compare won and lost deals to set each skill&#39;s engine weight. Build the rep × skill grid and the priority ranking.</p><span class="done">Done when: the weights make sense to a sales leader.</span></div>
+      <div class="week"><b>Week 5</b><h4>Build the dashboard</h4><p>One HTML template edited by hand, with the data poured in by a script. Add the coaching text from each rep&#39;s own calls.</p><span class="done">Done when: every tab draws and the screenshots look right.</span></div>
+      <div class="week"><b>Week 6</b><h4>Automate and guard</h4><p>Add the table checks and page checks, then a watcher that runs the whole chain when new files land.</p><span class="done">Done when: a refresh runs with nobody touching it.</span></div>
+    </div>
+    <div class="card need">
+      <h4>What you need</h4>
+      <div class="need-grid">
+        <div><b>A call recorder</b><span>that exports a text transcript per call.</span></div>
+        <div><b>A CRM export</b><span>of every deal, with its stage, owner and close date.</span></div>
+        <div><b>Email history</b><span>per deal, exported from the CRM or the mailbox.</span></div>
+        <div><b>An AI model</b><span>you can call from a script, for the scoring.</span></div>
+        <div><b>A scripting language</b><span>to glue the stages together. This one uses Ruby&#39;s standard library only.</span></div>
+        <div><b>A web browser</b><span>to open the dashboard. One HTML file, no server needed.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+</main>
+<div class="foot wrap">{{FOOTER}} <span id="gen-at"></span></div>
+<div id="tip" hidden></div>
+<script>
+/*__DATA__*/
+</script>
+<script>
+/*__APP_JS__*/
+</script>
+<script>
+/*__GLOSSARY_JS__*/
+</script>
+</body>
+</html>

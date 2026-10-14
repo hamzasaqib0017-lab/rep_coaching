@@ -1,0 +1,295 @@
+{
+  "_about": "Default coaching content for the rep coaching app: generic B2B wording for all 13 MEDDIC and Sandler skills. Copy this file to your run folder as content.json and tailor the examples to what your company sells. Keys and labels must not change; every text field can.",
+  "company": {
+    "name": "Your Company",
+    "sells": "a B2B product",
+    "buyer": "the buyer's company"
+  },
+  "dims": [
+    {
+      "key": "metrics", "fw": "meddic", "label": "Metrics", "letter": "M",
+      "plain": "The buyer's problem measured in numbers: money, hours, risk, lost revenue.",
+      "question": "Did the rep uncover measurable business outcomes tied to the buyer's problem?",
+      "look_for": "Quantified impact stated or confirmed by the buyer: what the problem costs per month or year, hours lost per week, error or failure rates, revenue at risk, headcount tied up in manual work. The rep quoting the vendor's own benchmarks is not a metric unless the buyer connects them to their own numbers.",
+      "anchors": {
+        "1": "the buyer says \"it costs us a lot\" with no figure.",
+        "3": "the buyer gives one number (team size, a rough error rate) that the rep acknowledges.",
+        "5": "the buyer states the money or time impact (annual cost, hours per week) and the rep confirms it back and writes it into the recap."
+      },
+      "questions": [
+        "\"What does this problem cost you today, in money or hours?\"",
+        "\"How many hours a week does your team spend working around it?\"",
+        "\"If nothing changes for another quarter, what does that cost?\""
+      ],
+      "what": "The framework needs the buyer's pain expressed in <strong>numbers</strong>: cost, hours, error rates, revenue at risk. Without numbers, \"we have problems\" doesn't close.",
+      "fix": "Every qualified opportunity needs at least one quantified figure tied to the buyer's pain. Ask \"how much\" and \"how often\" until the buyer gives you a number.",
+      "why_low": "Rep accepts qualitative pain ('we have problems') without pinning down numbers. Asking for money impact can feel pushy, or the rep isn't sure which financial questions to ask.",
+      "how_extend": "Quantification is locked in. Push to a three-period impact frame (this quarter, this year, and since the problem started). That is the maths that survives procurement.",
+      "practice": "Quantify the pain in money, hours or risk. Open the next call with: 'If this stays broken for another quarter, what does it cost you?' Get a number, not a complaint.",
+      "weight_reason": "Numbers are what survive procurement. A deal with a stated cost of the problem has an ROI case; a deal pitched on general improvement usually loses to the cheaper option or to doing nothing."
+    },
+    {
+      "key": "economic_buyer", "fw": "meddic", "label": "Economic Buyer", "letter": "E",
+      "plain": "The one person who controls the money and signs the contract.",
+      "question": "Did the rep identify, confirm, or meaningfully engage the person with final financial or approval authority?",
+      "look_for": "Who signs, who owns the budget, who gives final approval. Distinguish an approver who is only named (by the contact) from one who is engaged (on the call, asking about terms and cost).",
+      "anchors": {
+        "1": "\"leadership will decide\" with no name.",
+        "3": "the contact names the approver but there is no plan to include them.",
+        "5": "the approver joins the call, confirms they own the budget, and says what a yes requires."
+      },
+      "questions": [
+        "\"Beyond yourself, who else needs to sign off on this purchase?\"",
+        "\"Who owns the budget this would come from?\"",
+        "\"Walk me through the final yes: what does that approval chain look like?\""
+      ],
+      "what": "Who controls the budget and signs the contract? Deals fail at the final approval step when nobody with sign-off authority has been engaged. The framework wants the economic buyer <strong>named, titled, and engaged</strong> before a deal counts as qualified.",
+      "fix": "Identify the economic buyer at every account, by name and title, then engage them, even briefly. Count them as identified only when you know who they are AND have had a real exchange with them or their direct delegate.",
+      "why_low": "Rep stops at the most accessible contact and hopes the deal will surface the economic buyer later. Often calendar-avoidance (senior people are harder to book) or the rep doesn't feel senior enough to ask.",
+      "how_extend": "Economic buyer engagement is consistent. Push from 'reached' to 'co-presenting': have the economic buyer in the demo, not just a discovery call.",
+      "practice": "Reach the decision-maker. End every discovery call with: 'Beyond yourself, who else needs to sign off on this?' If you can't name the economic buyer after the call, the deal isn't qualified.",
+      "weight_reason": "In most B2B sales the person on the calls is not the person who signs. Deals where the signer never joined tend to die quietly at final approval, which is why this skill often carries the biggest weight."
+    },
+    {
+      "key": "decision_criteria", "fw": "meddic", "label": "Decision Criteria", "letter": "D",
+      "plain": "The yardstick the buyer will use to compare vendors, and which items on it are dealbreakers.",
+      "question": "Did the rep uncover how the buyer will judge vendors?",
+      "look_for": "Stated requirements, must-haves, dealbreakers, an RFP or scoring rubric, integration or security needs, service expectations, and any ranking of those criteria.",
+      "anchors": {
+        "1": "the buyer reacts positively to a demo but names no criteria.",
+        "3": "the buyer lists two or three things that matter without ranking them.",
+        "5": "the buyer walks through an explicit, ranked list including a hard requirement, and the rep mirrors it back in writing."
+      },
+      "questions": [
+        "\"Of the requirements you've named, which two are dealbreakers?\"",
+        "\"If we met 80% of your list, which item could we not miss?\"",
+        "\"What would make you pick another vendor over us?\""
+      ],
+      "what": "The framework wants the buyer's <strong>evaluation criteria</strong>: what they compare vendors on, what is a must-have, what is a dealbreaker.",
+      "fix": "Push from a list to a ranking. Make the buyer say which two or three criteria actually drive the decision.",
+      "why_low": "Rep doesn't ask the buyer to state criteria explicitly and assumes them from the product. Assumption-led discovery rather than buyer-led.",
+      "how_extend": "Criteria surfacing is reliable. Next level: get them in writing and reflect them back word for word in the proposal, so the buyer sees their own words.",
+      "practice": "Get the evaluation rubric in writing. Ask: 'What are the top three criteria you'll score vendors on?' then reflect those exact words back in the proposal.",
+      "weight_reason": "Buyers in a category tend to compare vendors on the same checklist, and most serious vendors meet it, so knowing the criteria often separates wins from losses less than you would expect."
+    },
+    {
+      "key": "decision_process", "fw": "meddic", "label": "Decision Process", "letter": "D",
+      "plain": "The steps, in order, between today and a signed contract.",
+      "question": "Did the rep uncover the buyer's actual sequence to a decision?",
+      "look_for": "Steps, reviewers, approvals, procurement, legal or security review, timing, pilot then review then approval, the current contract's end date.",
+      "anchors": {
+        "1": "\"we will get back to you\".",
+        "3": "the target month is known and a committee reviews vendors, but its members and the steps after the pilot are unknown.",
+        "5": "a dated sequence with owners from pilot to signature, confirmed by the buyer as a mutual action plan."
+      },
+      "questions": [
+        "\"What's the timeline and process to a decision? Who else is involved, and by when?\"",
+        "\"After this conversation, what's the next step on your side?\"",
+        "\"Walk me through how you usually choose a vendor: pilot, review, sign-off?\""
+      ],
+      "what": "The framework wants the <strong>buyer's actual sequence to a yes</strong>: who reviews when, what gates exist (committee, procurement, legal), what timing, and what triggers each next step.",
+      "fix": "Before any proposal goes out, answer: 'What has to happen between now and signature, in what order?' Get the buyer to state it, then write it down.",
+      "why_low": "Rep treats each call as standalone instead of mapping the path to close. Misses the 'what's the next gate?' question after each step, so deals slip stages without warning.",
+      "how_extend": "Process mapping is dialled in. Formalise it as a written mutual action plan agreed by both sides; that is how late-stage slippage gets eliminated.",
+      "practice": "Map the path to close. Ask: 'What's the usual evaluation sequence: demo, security review, approval, signature?' and record each step with a date.",
+      "weight_reason": "A mapped process is the difference between a forecastable deal and a hopeful one, though much of its effect overlaps with finding the economic buyer."
+    },
+    {
+      "key": "identify_pain", "fw": "meddic", "label": "Identify Pain", "letter": "I",
+      "plain": "The business problem the buyer owns, feels, and wants fixed.",
+      "question": "Did the rep uncover a business pain serious enough to justify change?",
+      "look_for": "Operational problems, compliance or security exposure, lost revenue, poor service from the current vendor, manual work, staff turnover, and the consequence of staying as they are. Pain must be felt, named, and owned by the buyer, not a generic industry complaint.",
+      "anchors": {
+        "1": "\"the current setup could be better\".",
+        "3": "the buyer names the pain and the current vendor but its frequency and knock-on impact are not drawn out.",
+        "5": "the buyer describes a specific incident, who took the heat for it, and what it cost, in their own words."
+      },
+      "questions": [
+        "\"What's the cost of doing nothing? What happens in six months if this isn't fixed?\"",
+        "\"Who in your company is hurting most from this?\"",
+        "\"If you could fix one thing about your current setup, what would it be and why?\""
+      ],
+      "what": "The framework needs pain to be a <strong>felt, named, owned problem</strong> the buyer wants solved, not a generic industry complaint. It must be specific and tied to a business outcome.",
+      "fix": "Once pain surfaces, capture the buyer's exact words and mirror them back in later conversations. The framework rewards pain that is owned and remembered, not just discussed.",
+      "why_low": "Rep accepts first-level pain ('we have an issue') and moves to solution mode before the pain is real enough to drive a purchase.",
+      "how_extend": "Pain identification is strong. Extend it by quantifying it (Metrics) and tying it to specific people; that bridges pain to ROI to a champion.",
+      "practice": "Drill three layers deep on pain. After every 'we have X problem', ask 'what happens because of that?' three times to surface the real impact.",
+      "weight_reason": "A named business problem gives the project a reason to happen this quarter. Without one, staying with the current option wins by default."
+    },
+    {
+      "key": "champion", "fw": "meddic", "label": "Champion", "letter": "C",
+      "plain": "Someone inside the buyer's company who sells for you when you are not in the room.",
+      "question": "Did the transcript show an internal champion: someone supportive, influential, engaged, and likely to advocate internally when the rep is not in the room?",
+      "look_for": "Proactive support, coaching the rep on internal politics, bringing other stakeholders in, asking for material to present internally, urgency, willingness to help move the deal. Distinguish a friendly contact (likes the product) from a champion (sells it internally).",
+      "anchors": {
+        "1": "the contact is polite and non-committal.",
+        "3": "the contact is engaged and curious but their advocacy has not been tested.",
+        "5": "the contact asks for a one-page summary to present to the approver, brings another stakeholder to the next call, and tells the rep what the approver will push back on."
+      },
+      "questions": [
+        "\"Who do you usually bring in when you evaluate a new vendor?\"",
+        "\"What's the strongest argument you'd make internally for going with us?\"",
+        "\"Have you been able to share what we discussed with your manager? What did they say?\""
+      ],
+      "what": "A champion is an <strong>internal advocate with credibility AND influence</strong>: someone selling for you when you are not in the room. The framework separates a friendly contact from a champion who actively pushes the deal internally.",
+      "fix": "At every account, ask yourself: 'If I disappeared for three weeks, who would be selling us internally?' The answer needs a name AND a specific advocacy behaviour.",
+      "why_low": "Rep stays at 'they like us' without converting it into active advocacy, and never explicitly asks for help selling internally.",
+      "how_extend": "You have a real champion. Equip them with a one-page internal pitch and rehearsal time so they can sell when you're not in the room.",
+      "practice": "Turn a contact into an advocate. After a good call, ask: 'Would you be willing to help me make the case internally?' That tests champion status, not just the relationship.",
+      "weight_reason": "Most deals have a friendly contact. A true champion helps, but rarely decides a deal on their own, so this skill usually carries a modest weight."
+    },
+    {
+      "key": "rapport", "fw": "sandler", "label": "Rapport", "step": 1,
+      "plain": "Trust. The buyer likes talking to you and believes what you say.",
+      "question": "Did the rep build trust and rapport early in the conversation?",
+      "look_for": "Warmth, introductions, conversational ease, relevance, personalisation, and signs the buyer felt comfortable speaking openly and volunteering information.",
+      "anchors": {
+        "1": "straight into a question list, short answers throughout.",
+        "3": "a warm opening that pivoted to features quickly.",
+        "5": "genuine trust: the buyer is candid about internal frustrations and their boss's priorities without being asked."
+      },
+      "questions": [
+        "Pair every warm exchange with one qualifying question that moves the deal forward."
+      ],
+      "what": "Sandler Rapport measures <strong>trust-building</strong>: warmth, personalisation, the rep being someone the buyer wants to keep talking to.",
+      "fix": "Maintain it, and check rapport isn't becoming a <em>substitute</em> for harder qualification. 'They like me, the deal will close' is the failure mode for naturally warm reps.",
+      "why_low": "Rep skips small talk to 'save time', or there's a personality mismatch. Both undermine every later step: pain, budget and decision all need trust to surface honestly.",
+      "how_extend": "Rapport is strong. Use it to learn the context that helps you sell internally: the buyer's priorities, pressures and politics.",
+      "practice": "Do pre-call research and connect on one personal or business hook in the first two minutes. Trust unlocks every later step.",
+      "weight_reason": "Almost every rep builds decent rapport, so it rarely separates won deals from lost ones."
+    },
+    {
+      "key": "upfront_contract", "fw": "sandler", "label": "Upfront Contract", "step": 2,
+      "plain": "Agreeing at the start of a call what it is for, how long it runs, and how it will end.",
+      "question": "Did the rep set a clear up-front contract for the meeting?",
+      "look_for": "Agreement at the start on agenda, length, purpose, and what outcome or next step will be decided by the end, and whether the rep returned to it at the close.",
+      "anchors": {
+        "1": "no agenda; the buyer drove and the call drifted into an overview.",
+        "3": "topics outlined but no agreed outcome.",
+        "5": "purpose, time and outcome agreed in the first two minutes, restated at the close, and the buyer committed to the next step on the call."
+      },
+      "questions": [],
+      "what": "Sandler Upfront Contract is about <strong>setting explicit expectations</strong> at the start of an interaction: agenda, time, outcomes, next steps.",
+      "fix": "Set the upfront contract at the START of the conversation, so the buyer can redirect it.",
+      "why_low": "Rep doesn't set an agenda and a decision outcome at the start. Often a habit: it feels too formal. Symptom: calls end with 'let me think about it'.",
+      "how_extend": "Upfront contracts are working. Carry them into follow-up emails too: 'By Friday we'll have X decided.'",
+      "practice": "Start every call with an explicit agreement: 'Today I'd like to cover A, B and C. By the end, we'll have a yes or no on the next step. Sound right?'",
+      "weight_reason": "Good practice, but it often predicts outcomes weakly, because long agenda-setting shows up most on early, exploratory calls."
+    },
+    {
+      "key": "pain", "fw": "sandler", "label": "Pain", "step": 3,
+      "plain": "The day-to-day frustration the buyer lives with in their own job.",
+      "question": "Did the rep uncover meaningful operational pain before or during the solution discussion?",
+      "look_for": "Distinct from MEDDIC Identify Pain (business outcome): this is day-to-day friction in the buyer's own work. Look for the specific bad day, who deals with it, the workaround, the person who quit over it, and whether the rep let the buyer describe it before pitching.",
+      "anchors": {
+        "1": "pain mentioned in passing and the rep pitched a feature.",
+        "3": "pain surfaced and acknowledged, but follow-ups on frequency and workaround were not asked.",
+        "5": "layered discovery until the buyer described their worst recurring moment, with emotional weight, and the rep let the silence work."
+      },
+      "questions": [
+        "\"Walk me through a typical week with your current process. Where's the friction?\"",
+        "\"At what moment in your workflow do you feel this most?\"",
+        "\"Tell me about the last time it went wrong and made you think 'we need to change'.\""
+      ],
+      "what": "Sandler Pain is <strong>operational pain</strong>, the day-to-day friction in the buyer's job, distinct from MEDDIC Identify Pain, which is business-outcome pain.",
+      "fix": "Mirror the operational pain back to the buyer in their own language across several conversations.",
+      "why_low": "Rep accepts the surface answer without drilling three layers deep. It can feel like prying to push into the emotional layer where buying decisions actually happen.",
+      "how_extend": "Pain discovery is strong. Record the third-layer pain quote word for word for the proposal; people buy from their own words.",
+      "practice": "Layered discovery: ask 'What happens because of that?' three times until the real pain surfaces. People buy emotionally and justify rationally.",
+      "weight_reason": "Day-to-day pain is what makes a buyer want change rather than put up with the status quo."
+    },
+    {
+      "key": "budget", "fw": "sandler", "label": "Budget", "step": 4,
+      "plain": "What the buyer spends today, what they could spend, and who owns that money.",
+      "question": "Did the rep discuss budget?",
+      "look_for": "Current spend on the problem or the incumbent, whether new budget exists, who owns it, when the budget year resets, cost constraints, and willingness to invest above current spend.",
+      "anchors": {
+        "1": "the rep mentioned pricing ranges; nothing was asked.",
+        "3": "current spend known; new budget and its owner unconfirmed.",
+        "5": "budget line, owner, timing and acceptable increase all stated by the buyer."
+      },
+      "questions": [
+        "\"What are you spending on this today?\"",
+        "\"What budget does this need to fit inside?\"",
+        "\"If we proposed X, would that be in range? If not, what would be?\""
+      ],
+      "what": "The framework wants an <strong>explicit budget conversation</strong>: what is allocated, what is flexible, what is a hard ceiling. Without it you can't tell a qualified deal from a price check.",
+      "fix": "Budget is part of qualifying fit, not a sales push. Ask early and frame it as mutual alignment.",
+      "why_low": "Rep avoids the money conversation and hopes it surfaces at the proposal stage. Asking about ranges early feels presumptuous.",
+      "how_extend": "Strong budget qualification. Extend it by confirming the budget OWNER (often not the economic buyer) and the budget TIMING (this year or next) early.",
+      "practice": "Confirm the ability AND willingness to invest money, time and effort. Ask: 'What range have you got approved for this?' early, before any proposal work.",
+      "weight_reason": "Budget matters, but once the signer is engaged the money is often workable, so it tends to weigh less than who signs. It is still very often the team's weakest skill."
+    },
+    {
+      "key": "decision", "fw": "sandler", "label": "Decision", "step": 5,
+      "plain": "Who approves, in what order, by when, and against which alternatives.",
+      "question": "Did the rep uncover how the buying decision will be made?",
+      "look_for": "Distinct from MEDDIC Decision Process (stages): this is the mechanics. Who decides, in what order, by when, through which gate (committee vote, executive approval, procurement, budget cycle), and against which alternatives, including doing nothing.",
+      "anchors": {
+        "1": "\"we will discuss internally\".",
+        "3": "the timeline is known but not the approval sequence or the other vendors.",
+        "5": "approvers, sequence, timing and alternatives mapped in one pass and confirmed."
+      },
+      "questions": [
+        "\"Walk me through how approval actually works: who signs, which committee meets, in what order?\"",
+        "\"Is there a procurement, security or legal review I should know about?\"",
+        "\"Does your budget cycle or current contract affect when this can close?\""
+      ],
+      "what": "Sandler Decision is about <strong>mechanics</strong>: who has to approve, in what order, by when, through what gate.",
+      "fix": "Surface the approval mechanics explicitly. Once you know them, the deal becomes forecastable.",
+      "why_low": "Rep doesn't pin down stakeholders, timeline and competing alternatives, and misses the 'what happens after this?' question that exposes gaps.",
+      "how_extend": "Decision mapping is solid. Go deeper with 'what would make you choose us over them?' to surface what you need to win on.",
+      "practice": "Map who decides, how, on what timeline, and against what alternatives. Pin each down before the demo.",
+      "weight_reason": "The approval mechanics overlap heavily with Decision Process and Economic Buyer, so on their own they usually add less to the prediction."
+    },
+    {
+      "key": "fulfillment", "fw": "sandler", "label": "Fulfillment", "step": 6,
+      "plain": "Showing exactly how the product fixes their stated problem, and how rollout will work.",
+      "question": "Did the rep connect the solution specifically to the buyer's stated needs and make the rollout concrete?",
+      "look_for": "Demo segments tied to a stated pain, confirmation questions ('does that address the issue?'), and implementation specifics: rollout plan, timeline, owners, training, integration, dates.",
+      "anchors": {
+        "1": "a feature-led walkthrough with no link to anything the buyer said and no rollout plan.",
+        "3": "the product linked to the pain at a high level, with a generic rollout window.",
+        "5": "each demo segment mapped to a confirmed need, plus a dated rollout plan with named owners."
+      },
+      "questions": [
+        "\"If we signed by [date], what would the first 30 days look like on your side?\"",
+        "\"Who would own the rollout internally? What does their first week look like?\"",
+        "\"What could go wrong during rollout? Let's plan around it.\""
+      ],
+      "what": "Sandler Fulfillment is about <strong>connecting the solution to stated needs and making implementation concrete</strong>. Buyers stall when the rollout is abstract.",
+      "fix": "Late-stage deals need an implementation plan: steps, dates, owners. Even a rough one.",
+      "why_low": "Rep runs a feature tour without anchoring each part to confirmed pain, playing the deck instead of selling against confirmed need.",
+      "how_extend": "Strong fulfillment: your demos tie to pain. Next level: confirm before the demo, 'here's what I'll cover, anything missing?'",
+      "practice": "Present the solution ONLY against confirmed pain, budget and decision. Match each demo segment to a specific gap the buyer admitted to.",
+      "weight_reason": "Buyers who can picture exactly how the rollout will work tend to sign; buyers left with a vague rollout go quiet."
+    },
+    {
+      "key": "postsell", "fw": "sandler", "label": "Postsell", "step": 7,
+      "plain": "Locking in the next step, with an owner and a date on both sides, before the call ends.",
+      "question": "Did the rep lock in forward motion at the end of the call?",
+      "look_for": "A recap, concrete next steps with an owner and date on both sides, a buyer-side action, a calendared next meeting, and a written confirmation afterwards.",
+      "anchors": {
+        "1": "\"I will send some information\", \"sounds good\", no dates.",
+        "3": "steps named, one dated, nothing committed by the buyer.",
+        "5": "owner, action and date for every step, the buyer repeats their commitments back, and the next meeting is in the calendar."
+      },
+      "questions": [
+        "\"Let me make sure I have this right: by [date], you'll [action], and I'll [action]. Sound right?\"",
+        "\"What's the next concrete step from here, and who owns it?\"",
+        "\"If I don't hear back by [date], can I assume [outcome] and move forward?\""
+      ],
+      "what": "Sandler Post-Sell measures <strong>locked-in forward motion</strong>: concrete next steps with an owner, an action and a date. Without it, deals stall between conversations.",
+      "fix": "Every conversation ends with a confirmed next step: what was decided, who owns the next action, by when. Put it in writing within hours.",
+      "why_low": "Rep ends the call on a high and lets the buyer 'sleep on it' without locking concrete next actions. The call went well, so why push?",
+      "how_extend": "Postsell discipline is good. Extend it by sending a written summary within an hour of the call, with every milestone in writing.",
+      "practice": "Before the buyer hangs up, agree the next step with an owner and a date on both sides, then confirm it in writing the same day.",
+      "weight_reason": "Deals stall in the gaps between conversations. Calls that end with an owner, an action and a date keep momentum; 'I'll send some info' drifts."
+    }
+  ],
+  "overlaps": [
+    { "a": "Identify Pain", "b": "Pain", "text": "<strong>MEDDIC</strong> wants the business problem, the one that shows up in a leadership meeting: lost revenue, risk, cost. <strong>Sandler</strong> wants the day-to-day frustration in the buyer's own job. The first justifies the purchase; the second makes the buyer want it." },
+    { "a": "Decision Process", "b": "Decision", "text": "<strong>MEDDIC</strong> wants the stages between today and signature: pilot, review, sign-off. <strong>Sandler</strong> wants the mechanics: who approves, in what order, by when, and against which alternatives, including doing nothing." },
+    { "a": "Economic Buyer", "b": "Budget", "text": "<strong>MEDDIC</strong> asks <em>who</em> controls the money. <strong>Sandler</strong> asks <em>how much</em> money there is and whether it is set aside. Knowing the signer without the budget, or the reverse, still leaves the deal open." }
+  ]
+}

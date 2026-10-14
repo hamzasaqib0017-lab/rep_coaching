@@ -1,0 +1,349 @@
+{
+  "_about": "Coaching content for the fictional Bluewick Fleet Systems (fleet telematics): the wording the published demo uses. Compare with ../../rep-coaching/assets/content.json to see what tailoring to a company looks like.",
+  "company": {
+    "name": "Bluewick",
+    "sells": "GPS tracking, ELD compliance and dashcams to commercial fleets",
+    "buyer": "the fleet"
+  },
+  "dims": [
+    {
+      "key": "metrics",
+      "fw": "meddic",
+      "label": "Metrics",
+      "letter": "M",
+      "plain": "The buyer's problem measured in numbers: dollars, hours, violations, trucks off the road.",
+      "question": "Did the rep uncover measurable business outcomes tied to the buyer's problem?",
+      "look_for": "Look for quantified impact stated or confirmed by the buyer: HOS violations per quarter, idle hours or fuel spend, at-fault claims and the premium change that followed, hours a week of log reconciliation or paperwork, trucks down for hardware failures, missed deliveries. The rep quoting our own benchmarks (uptime, install time) is not a metric unless the buyer connects it to their numbers.",
+      "anchors": {
+        "1": "the buyer says \"it costs us a lot\" with no figure.",
+        "3": "the buyer gives one number (roughly 200 vehicles, a handful of violations last quarter) that the rep acknowledges.",
+        "5": "the buyer states dollar or time impact (annual idle fuel spend, hours per week reconciling logs) and the rep confirms it back and writes it into the recap."
+      },
+      "questions": [
+        "\"How many HOS violations did you take in the last quarter? What did the last DOT audit cost you?\"",
+        "\"How many hours a week does your team spend reconciling logs or chasing paperwork?\"",
+        "\"What did the last at-fault claim cost after the premium adjustment?\""
+      ],
+      "what": "The framework needs the buyer's pain expressed in <strong>numbers</strong> — HOS violations, idle hours, fuel spend, accident claims, hours of paperwork, trucks down for hardware failures. Without numbers, \"we have problems\" doesn't close.",
+      "fix": "Every qualified opportunity needs at least one quantified figure tied to the buyer's pain. Ask \"how much\" and \"how often\" until the buyer gives you a number.",
+      "why_low": "Rep often accepts qualitative pain ('we have problems') without pinning down numbers. Asking for dollar impact can feel intrusive or pushy. Sometimes a domain-confidence issue — rep isn't sure what financial questions to ask.",
+      "how_extend": "Quantification is locked in — push to a 3-period impact frame (this quarter + this year + cumulative since the issue started). That's the math that wins procurement battles.",
+      "practice": "Quantify the pain in dollars, hours, or risk units. Open the next call with: 'If this stays broken for another quarter, what does it cost you?' Get a number, not a complaint.",
+      "weight_reason": "Fleets already track the numbers that justify the purchase: fuel spend, idle hours, HOS violations, at-fault claims and the premium rises that follow. Deals that put a dollar figure in the recap survived procurement. Deals pitched on \"better visibility\" lost to the cheaper incumbent."
+    },
+    {
+      "key": "economic_buyer",
+      "fw": "meddic",
+      "label": "Economic Buyer",
+      "letter": "E",
+      "plain": "The one person who controls the money and signs the contract.",
+      "question": "Did the rep identify, confirm, or meaningfully engage the person with final financial or approval authority?",
+      "look_for": "Look for who signs, who owns the fleet technology budget, who gives final approval, or who can authorise the vendor decision. Distinguish an approver who is named from one who is engaged: named indirectly by the contact scores in the middle; on the call, asking about term and cost, scores at the top.",
+      "anchors": {
+        "1": "\"leadership will decide\" with no name.",
+        "3": "the contact names the VP of Operations as the approver but no plan exists to include them.",
+        "5": "the approver joins the call, confirms they own the budget, and frames what a yes requires."
+      },
+      "questions": [
+        "\"Beyond yourself, who else needs to sign off on this purchase?\"",
+        "\"Who controls the fleet technology budget at your company?\"",
+        "\"Is there an owner, CFO, or VP who needs to approve this decision?\"",
+        "\"Walk me through who's involved in the final yes — what does that approval chain look like?\""
+      ],
+      "what": "Who at the fleet controls the budget and signs the contract? This is the single most important MEDDIC dimension — deals fail at the final approval step when nobody with sign-off authority has been engaged. The framework wants the EB <strong>named, titled, and engaged</strong> before a deal can be considered qualified.",
+      "fix": "Identify the EB at every account, by name and title. Then engage them — even briefly. The framework counts an EB as \"identified\" only when there's evidence the rep knows who they are AND has had a substantive interaction with them or their direct delegate.",
+      "why_low": "Rep stops at the most accessible contact and hopes deal velocity will surface the EB later. Often calendar-avoidance — EBs are harder to book. Sometimes a status issue — rep doesn't feel senior enough to engage them directly.",
+      "how_extend": "EB engagement is consistent — push from 'reached' to 'co-presenting': have the EB in the demo room, not just discovery. Co-presenter EBs convert at roughly 2× standalone-EB rates.",
+      "practice": "Reach the decision-maker. End every discovery with: 'Beyond yourself, who else needs to sign off on this?' — if you can't name the EB after the call, the deal isn't qualified.",
+      "weight_reason": "Telematics is signed above the person on the calls. Reps mostly talk to a fleet or safety manager, but a multi-year, per-vehicle contract that touches insurance, payroll and compliance is signed by the owner, the CFO or the VP of Operations. In the past data, deals where the signer never joined most often died at \"final approval\", the single most common lost reason."
+    },
+    {
+      "key": "decision_criteria",
+      "fw": "meddic",
+      "label": "Decision Criteria",
+      "letter": "D",
+      "plain": "The yardstick the buyer will use to compare vendors, and which items on it are dealbreakers.",
+      "question": "Did the rep uncover how the buyer will judge vendors?",
+      "look_for": "Look for stated requirements, must-haves, dealbreakers, selection standards, an RFP rubric, install or integration needs, service expectations, and any ranking of those criteria.",
+      "anchors": {
+        "1": "the buyer reacts positively to a demo but names no criteria.",
+        "3": "the buyer lists two or three things that matter (install speed, driver app, support) without ranking them.",
+        "5": "the buyer walks through an explicit, ranked rubric including a hard requirement, and the rep mirrors it back in writing."
+      },
+      "questions": [
+        "\"Of the requirements you've named, which two are dealbreakers?\"",
+        "\"If we hit 80% of your list but missed one item, what would be the one we can't miss?\"",
+        "\"What's the criterion that would make you pick a competitor over us?\""
+      ],
+      "what": "The framework wants the buyer's <strong>evaluation criteria</strong> — what they're comparing vendors on, what's a must-have, what's a dealbreaker.",
+      "fix": "Push from list to ranking — make the buyer reveal which 2–3 criteria actually drive the decision.",
+      "why_low": "Rep doesn't ask the buyer to articulate criteria explicitly — assumes them from the product mental model. Reflects assumption-driven discovery rather than buyer-led.",
+      "how_extend": "Criteria surfacing is reliable — next level: get them written and reflected back verbatim in the proposal, so the buyer sees their own words.",
+      "practice": "Get the evaluation rubric in writing. Ask: 'What are the top 3 criteria you'll score vendors on?' then reflect those exact words back in the proposal.",
+      "weight_reason": "Most fleets compare vendors on the same checklist: ELD compliance, camera quality, the driver app, installation. Bluewick meets it about as often as its rivals do, so knowing the criteria barely separates wins from losses."
+    },
+    {
+      "key": "decision_process",
+      "fw": "meddic",
+      "label": "Decision Process",
+      "letter": "D",
+      "plain": "The steps, in order, between today and a signed contract.",
+      "question": "Did the rep uncover the buyer's actual sequence to a decision?",
+      "look_for": "Look for steps, reviewers, approvals, procurement, timing, safety-committee review, pilot then review then approval, the incumbent contract end date, partner involvement, and the install timeline.",
+      "anchors": {
+        "1": "\"we will get back to you\".",
+        "3": "the renewal month is known and a committee reviews vendors, but its membership and the steps after the pilot are unknown.",
+        "5": "a dated sequence with owners from pilot to signature, confirmed by the buyer as a mutual action plan."
+      },
+      "questions": [
+        "\"What's the timeline and process to a decision? Who else needs to be involved, and by when?\"",
+        "\"After this conversation, what's the next step on your side?\"",
+        "\"Walk me through your typical vendor selection — pilot, committee review, owner sign-off, what's the sequence?\""
+      ],
+      "what": "The framework wants the <strong>buyer's actual sequence to a yes</strong> — who reviews when, what gates exist (safety committee, ownership approval, procurement), what timing, what triggers each next step.",
+      "fix": "Before any proposal goes out, the qualification record needs to answer: \"What needs to happen between now and signature, in what order?\" Get the buyer to state it. Then write it down.",
+      "why_low": "Rep treats each call as standalone instead of mapping the path to close. Misses 'what's the next gate?' question after each step. Symptom: deals slip stages with no warning.",
+      "how_extend": "Process mapping is dialed in — formalize it as a written mutual action plan signed by both sides. That's how late-stage slippage gets eliminated.",
+      "practice": "Map the path to close. Ask: 'What's the typical evaluation sequence — demo, security review, board approval, signature?' and milestone each step in your CRM.",
+      "weight_reason": "Fleet purchases pass through safety committees, owner approval, and sometimes the insurer or leasing partner. Knowing the steps protects the forecast, but much of the effect is already captured by finding the signer, so the weight is moderate."
+    },
+    {
+      "key": "identify_pain",
+      "fw": "meddic",
+      "label": "Identify Pain",
+      "letter": "I",
+      "plain": "The business problem the buyer owns, feels, and wants fixed.",
+      "question": "Did the rep uncover a business pain serious enough to justify change?",
+      "look_for": "Look for operational problems, compliance exposure, accident liability, poor support, hardware failures, manual work, driver churn, and the consequence of staying with the current setup. Pain must be felt, named, and owned by the buyer, not a generic industry complaint.",
+      "anchors": {
+        "1": "\"the current setup could be better\".",
+        "3": "the buyer names the pain and the incumbent but its frequency and downstream impact are not drawn out.",
+        "5": "the buyer describes a specific incident, who took the heat for it, and what it cost, in their own words."
+      },
+      "questions": [
+        "\"What's the cost of doing nothing about [pain]? What happens in 6 months if this isn't fixed?\"",
+        "\"Who at your company is hurting the most from this problem?\"",
+        "\"If you could fix one thing about your current telematics setup, what would it be and why?\""
+      ],
+      "what": "The framework needs pain to be a <strong>felt, named, owned problem</strong> the buyer wants solved — not a generic industry complaint. Pain needs to be specific and tied to a business outcome.",
+      "fix": "Once pain surfaces, capture the buyer's exact words. Mirror those words back in future interactions. The framework rewards pain that's owned and remembered, not just discussed.",
+      "why_low": "Rep accepts first-level pain ('we have an issue') and moves to solution mode. Discovery/demo prioritization issue — moves too fast to product talk before pain is real enough to drive purchase.",
+      "how_extend": "Pain identification is strong — extend by quantifying it (Metrics dim) and tying to specific stakeholders. That bridges pain → ROI → Champion.",
+      "practice": "Drill three layers deep on pain. After every 'we have X problem,' ask 'what happens because of that?' three times to surface the emotional impact.",
+      "weight_reason": "A named business problem, such as a failed DOT audit or a claim that raised premiums, gives the project a reason to happen this quarter. Without one, renewing the incumbent wins by default."
+    },
+    {
+      "key": "champion",
+      "fw": "meddic",
+      "label": "Champion",
+      "letter": "C",
+      "plain": "Someone inside the buyer's company who sells for you when you are not in the room.",
+      "question": "Did the transcript show an internal champion: someone supportive, influential, engaged, and likely to advocate internally when the rep is not in the room?",
+      "look_for": "Look for proactive support, internal alignment, coaching the rep on internal politics, arranging for other stakeholders to join, asking for material to present internally, positive comparison, urgency, or willingness to help move the deal. Distinguish a friendly contact (likes the product) from a champion (sells it internally). Note whether the advocate is inside the fleet or on the partner side.",
+      "anchors": {
+        "1": "the contact is polite and non-committal.",
+        "3": "the contact is engaged and curious but advocacy has not been tested.",
+        "5": "the contact asks for a one-page summary to present to the approver, arranges the safety director's attendance, and tells the rep what the owner will push back on."
+      },
+      "questions": [
+        "\"Who do you usually bring along when you evaluate vendor switches?\"",
+        "\"What's the strongest argument you'd make internally for going with Bluewick?\"",
+        "\"Have you been able to share what we discussed with the safety director? What was their reaction?\""
+      ],
+      "what": "A Champion is an <strong>internal advocate with credibility AND political influence</strong> — someone selling for you when you're not in the room. The framework distinguishes between a \"friendly contact\" and a \"champion\" (actively pushes the deal internally, defends Bluewick in the owner's office).",
+      "fix": "At every account, ask: \"If I disappear for 3 weeks, who's selling Bluewick internally?\" The answer needs a name AND a specific advocacy behavior. Document both.",
+      "why_low": "Rep stays at 'they like us' without converting to active advocacy. No explicit ask for internal selling commitment. Often rep conflates 'likes' with 'sells on your behalf'.",
+      "how_extend": "You have a real Champion — invest in equipping them with a one-page internal-pitch deck and rehearsal time, so they can sell when you're not in the room.",
+      "practice": "Convert a contact into an advocate. After a call goes well, ask: 'Would you be willing to help me make the case internally?' — this qualifies champion status, not just relationship.",
+      "weight_reason": "Fleet managers tend to be enthusiastic about better tools, so most deals have a friendly contact. A true champion helps, but rarely decides the deal alone."
+    },
+    {
+      "key": "rapport",
+      "fw": "sandler",
+      "label": "Rapport",
+      "step": 1,
+      "plain": "Trust. The buyer likes talking to you and believes what you say.",
+      "question": "Did the rep build trust and rapport early in the conversation?",
+      "look_for": "Look for warmth, introductions, conversational ease, relevance, personalisation, and signs the buyer felt comfortable engaging openly and volunteering information.",
+      "anchors": {
+        "1": "straight into a question list, short answers throughout.",
+        "3": "a warm opening that pivoted to features quickly.",
+        "5": "genuine trust, the buyer candid about internal frustrations and the owner's priorities without being asked."
+      },
+      "questions": [
+        "Pair every warm exchange with one qualifying question that moves the deal forward."
+      ],
+      "what": "Sandler Rapport measures <strong>trust-building</strong> — warmth, personalization, the rep being someone the buyer wants to keep talking to.",
+      "fix": "Maintain. Audit whether rapport is becoming a <em>substitute</em> for harder qualification — \"they like me, the deal will close\" — that's the failure mode for naturally warm reps.",
+      "why_low": "Rep skips small-talk to 'save time' or there's a personality mismatch. Both kill the foundation for every later step — pain, budget, decision all require trust to surface honestly.",
+      "how_extend": "Rapport is strong — leverage by gathering personal context that helps you sell internally (their priorities, their pressures, their political situation).",
+      "practice": "Pre-call research: connect on one personal or contextual hook in the first 2 minutes. Trust unlocks every later step in the call.",
+      "weight_reason": "Almost every rep builds good rapport (the team averages above 8 out of 10), so it barely separates won deals from lost ones."
+    },
+    {
+      "key": "upfront_contract",
+      "fw": "sandler",
+      "label": "Upfront Contract",
+      "step": 2,
+      "plain": "Agreeing at the start of a call what it is for, how long it runs, and how it will end.",
+      "question": "Did the rep set a clear up-front contract for the meeting?",
+      "look_for": "Look for agreement at the start on agenda, length, purpose, what will be covered, and what outcome or next step will be decided by the end, and whether the rep returned to it at the close.",
+      "anchors": {
+        "1": "no agenda, the buyer drove and the call drifted into an overview.",
+        "3": "topics outlined but no agreed outcome.",
+        "5": "purpose, time, and outcome agreed in the first two minutes, restated at the close, and the buyer committed to the next step on the call."
+      },
+      "questions": [
+
+      ],
+      "what": "Sandler Upfront Contract is about <strong>setting explicit expectations</strong> at the start of an interaction — agenda, time, outcomes, next steps.",
+      "fix": "If you do set upfront contracts, do it at the START of the conversation so the buyer can redirect.",
+      "why_low": "Rep doesn't explicitly set agenda + decision outcome at call start. Often a habit issue — feels too formal. Symptom: calls end with 'let me think about it' instead of a decision.",
+      "how_extend": "Upfront contracts are working — push them into email follow-ups too: 'By Friday we'll have X decided.' Removes ambiguity at every step of the cycle.",
+      "practice": "Start every call with explicit agreement: 'Today I'd like to cover A, B, C. By the end, we'll have a yes/no on next step. Sound right?'",
+      "weight_reason": "In the past data, won deals scored this slightly lower than lost deals, so the engine gives it no weight. The likely reason: long agenda-setting shows up most on early, exploratory calls, which rarely close."
+    },
+    {
+      "key": "pain",
+      "fw": "sandler",
+      "label": "Pain",
+      "step": 3,
+      "plain": "The day-to-day frustration the buyer lives with in dispatch, the shop, and the cab.",
+      "question": "Did the rep uncover meaningful operational pain before or during the solution discussion?",
+      "look_for": "Distinct from MEDDIC Identify Pain (business outcome): this is day-to-day friction in dispatch, the shop, and the cab. Look for the specific bad day, who deals with it, the workaround, the driver who quit over it, and whether the rep let the buyer describe it before pitching.",
+      "anchors": {
+        "1": "pain mentioned in passing and the rep pitched a feature.",
+        "3": "pain surfaced and acknowledged, follow-ups on frequency and workaround not asked.",
+        "5": "layered discovery until the buyer described the Friday afternoon scramble, with emotional weight, and the rep let the silence work."
+      },
+      "questions": [
+        "\"Walk me through a typical week dealing with [current vendor/process] — what's the friction?\"",
+        "\"What's the moment in your workflow where you feel this pain most?\"",
+        "\"Tell me about the last outage, failed unit, or roadside inspection that made you think 'we need to switch'.\""
+      ],
+      "what": "Sandler Pain is <strong>operational pain</strong> (the day-to-day friction in dispatch, the shop, and the cab) — distinct from MEDDIC Identify Pain which is business-outcome pain.",
+      "fix": "Mirror operational pain back to the buyer in their own language across multiple touchpoints.",
+      "why_low": "Rep accepts the surface answer without 3-layer drill. Comfort issue — feels prying to push deeper into the emotional layer where buying decisions actually happen.",
+      "how_extend": "Pain discovery is strong — make sure you're documenting the third-layer pain quote verbatim for the proposal. People buy from their own words.",
+      "practice": "Layered Sandler discovery — 'What happens because of that?' three times until emotional pain surfaces. People buy emotionally and justify rationally.",
+      "weight_reason": "Day-to-day pain in dispatch, the shop and the cab, such as a driver quitting over paperwork or a Friday-afternoon scramble to find a truck, is what makes a buyer want change rather than put up with the status quo."
+    },
+    {
+      "key": "budget",
+      "fw": "sandler",
+      "label": "Budget",
+      "step": 4,
+      "plain": "What the buyer spends today, what they could spend, and who owns that money.",
+      "question": "Did the rep discuss budget?",
+      "look_for": "Look for current per-vehicle spend with the incumbent, whether new budget exists, who owns it, when the budget year resets, cost constraints, funding mechanics such as insurance credits, and willingness to invest above current spend.",
+      "anchors": {
+        "1": "pricing ranges mentioned by the rep, nothing asked.",
+        "3": "current spend known, new budget and owner unconfirmed.",
+        "5": "budget line, owner, timing, and acceptable increase all stated by the buyer."
+      },
+      "questions": [
+        "\"What are you spending per vehicle per month on telematics today?\"",
+        "\"What's the budget envelope this needs to fit inside?\"",
+        "\"If we proposed X, would that be within range? If not, what would?\""
+      ],
+      "what": "The framework wants <strong>explicit budget discussion</strong> — what's allocated, what's flexible, what's a hard ceiling. Without budget alignment, you can't tell a qualified deal from a tire-kicker.",
+      "fix": "Budget is part of fit qualification, not a sales push. Ask early, frame as mutual alignment.",
+      "why_low": "Rep avoids the money conversation, hopes it'll surface in the proposal phase. Confrontation-avoidance issue — feels presumptuous to ask about ranges early.",
+      "how_extend": "Strong budget qualification — extend by confirming budget OWNER (often different from EB) and budget TIMING (this fiscal vs next) early.",
+      "practice": "Confirm capability AND willingness to invest money, time, organizational effort. Ask: 'What range have you got approved for this?' — early, before proposal effort.",
+      "weight_reason": "Per-vehicle monthly pricing is familiar in this market, so once the signer is engaged the money is usually workable. Budget matters, but less than who signs. Even so, it is the team's weakest skill."
+    },
+    {
+      "key": "decision",
+      "fw": "sandler",
+      "label": "Decision",
+      "step": 5,
+      "plain": "Who approves, in what order, by when, and against which alternatives.",
+      "question": "Did the rep uncover how the buying decision will be made?",
+      "look_for": "Distinct from MEDDIC Decision Process (stages): this is the mechanics. Look for who decides, in what order, by when, with what gate (committee vote, owner approval, procurement, budget cycle), and against which alternatives including doing nothing or renewing.",
+      "anchors": {
+        "1": "\"we will discuss internally\".",
+        "3": "the timeline is known but not the approval sequence or the other vendors.",
+        "5": "approvers, sequence, timing, and alternatives mapped in one pass and confirmed."
+      },
+      "questions": [
+        "\"Walk me through how the actual approval works — who signs, what committee meets, what's the sequence?\"",
+        "\"Is there a procurement process, vendor risk review, or legal review I should know about?\"",
+        "\"Does your budget cycle or the incumbent contract term affect when this can close?\""
+      ],
+      "what": "Sandler Decision is about <strong>mechanics</strong> — who has to approve, in what order, by when, with what gate type (safety committee vote, owner approval, procurement review, budget cycle).",
+      "fix": "Surface the approval mechanics explicitly. Once you know them, the deal becomes forecastable.",
+      "why_low": "Rep doesn't pin down stakeholders + timeline + competing alternatives. Misses the 'and what happens after this?' question that exposes process gaps.",
+      "how_extend": "Decision mapping is solid — push deeper with 'what would make you go with us vs. them?' explicitly. That surfaces the criteria you need to win on.",
+      "practice": "Map who decides, how decisions get made, on what timeline, against what alternatives. Pin each down before moving to demo.",
+      "weight_reason": "The approval mechanics overlap heavily with Decision Process and Economic Buyer, so on its own this skill adds little to the prediction."
+    },
+    {
+      "key": "fulfillment",
+      "fw": "sandler",
+      "label": "Fulfillment",
+      "step": 6,
+      "plain": "Showing exactly how the product fixes their stated problem and how rollout will work.",
+      "question": "Did the rep connect the solution specifically to the buyer's stated needs and make the rollout concrete?",
+      "look_for": "Look for demo segments tied to a stated pain, confirmation questions (\"does that address the issue?\"), and implementation specifics: yards, install windows, hardware counts, who installs, driver training, TMS integration, dates and owners.",
+      "anchors": {
+        "1": "a feature-led walkthrough with no tie to anything the buyer said and no install plan.",
+        "3": "the product linked to the pain at a high level with a generic install window.",
+        "5": "each segment mapped to a confirmed need and a dated rollout across the fleet's yards with a named installer."
+      },
+      "questions": [
+        "\"If we sign by [date], what does the first 30 days look like on your side?\"",
+        "\"Who would own the rollout internally? What does their week 1 look like?\"",
+        "\"Walk me through what could go wrong at install — let's plan around it.\""
+      ],
+      "what": "Sandler Fulfillment is about <strong>implementation specifics</strong> — install schedule, hardware logistics, driver training, integration, what the rollout actually looks like. Buyers stall when fulfillment is abstract.",
+      "fix": "Late-stage qualification record needs an implementation plan: yards, dates, units, owners. Even rough.",
+      "why_low": "Rep does feature-dumping demo without anchoring each segment to confirmed pain. Demo-script issue — playing the deck instead of selling against confirmed need.",
+      "how_extend": "Strong fulfillment — your demos tie to pain. Next level: pre-demo confirmation — 'here's what I'll cover, anything missing?' That gates feature-dump tendency.",
+      "practice": "Present solution ONLY against confirmed pain, budget, decision. Match each demo segment back to a specific gap the buyer admitted to.",
+      "weight_reason": "Every vehicle needs hardware installed, across several yards, without taking trucks off the road, and every driver needs training. Buyers who saw a dated, yard-by-yard rollout plan signed. Buyers left with a vague rollout went quiet."
+    },
+    {
+      "key": "postsell",
+      "fw": "sandler",
+      "label": "Postsell",
+      "step": 7,
+      "plain": "Locking in the next step, with an owner and a date on both sides, before the call ends.",
+      "question": "Did the rep lock in forward motion at the end of the call?",
+      "look_for": "Look for a recap, concrete next steps with owner and date on both sides, a buyer-side action, a calendared next meeting, and a written confirmation afterwards.",
+      "anchors": {
+        "1": "\"I will send some information\", \"sounds good\", no dates.",
+        "3": "steps named, one dated, nothing committed by the buyer.",
+        "5": "owner, action, and date for every step, the buyer repeats their commitments back, and the next meeting is calendared."
+      },
+      "questions": [
+        "\"Let me make sure I have this right — by [date], you'll [action], and I'll [action]. Sound right?\"",
+        "\"What's the next concrete step from here, and who owns it?\"",
+        "\"If I don't hear back by [date], can I assume [outcome] and move forward?\""
+      ],
+      "what": "Sandler Post-Sell measures <strong>locked-in forward motion</strong> — concrete next steps with owner, action, and date. Without this, deals stall between touchpoints.",
+      "fix": "Every touchpoint produces a confirmed next step: what was decided, who owns the next action, by when. Capture it in writing within hours.",
+      "why_low": "Rep ends call after verbal commit and lets buyer 'sleep on it' without locking concrete next actions. Relief-driven — call ended well, why push?",
+      "how_extend": "Postsell discipline is good — extend by sending a written summary within an hour of the call, with all milestones in writing. Locks the verbal in text.",
+      "practice": "Lock implementation details immediately after verbal commit. Walk through onboarding sequence before they hang up to prevent buyer's remorse and scope creep.",
+      "weight_reason": "Fleet deals have long gaps between calls while the buyer chases internal approvals. Calls that ended with an owner, an action and a date kept momentum. Calls that ended with \"I will send some info\" drifted to the next budget cycle."
+    }
+  ],
+  "overlaps": [
+    {
+      "a": "Identify Pain",
+      "b": "Pain",
+      "text": "<strong>MEDDIC</strong> wants the business problem, the one that shows up in a board meeting: fines, claims, fuel spend. <strong>Sandler</strong> wants the day-to-day frustration: the Friday-afternoon scramble in dispatch. The first justifies the purchase; the second makes the buyer want it."
+    },
+    {
+      "a": "Decision Process",
+      "b": "Decision",
+      "text": "<strong>MEDDIC</strong> wants the stages between today and signature: pilot, committee, owner sign-off. <strong>Sandler</strong> wants the mechanics: who approves, in what order, by when, and against which alternatives, including doing nothing."
+    },
+    {
+      "a": "Economic Buyer",
+      "b": "Budget",
+      "text": "<strong>MEDDIC</strong> asks <em>who</em> controls the money. <strong>Sandler</strong> asks <em>how much</em> money there is and whether it is set aside. Knowing the signer without knowing the budget, or the reverse, still leaves the deal open."
+    }
+  ]
+}
