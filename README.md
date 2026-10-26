@@ -14,7 +14,7 @@ One self-contained HTML file (no server, opens in any browser) with six tabs:
 |---|---|
 | **Start Here** | What the app is and where to go. |
 | **MEDDIC & Sandler 101** | What each of the 13 skills means, the question it answers, and what a score of 1, 3 and 5 sounds like. Ends with a quiz. |
-| **Engine Weights** | Which skills actually win deals for *your* company, learned from your closed deals, with win rates when each skill was weak versus strong. |
+| **Engine Weights** | Exploratory associations between observed skill scores and historical wins/losses, with sample counts. |
 | **Team Summary** | The team's averages, its weakest skill, and every rep against every skill in one grid. |
 | **Rep Coaching** | Per rep: three coached priorities (why it ranks there, two excerpts from their own calls with coaching notes, what good sounds like, a drill, questions to ask), then the other ten skills, each coached. |
 | **Build Your Own** | How the system works, using your data as the example. |
@@ -35,8 +35,10 @@ One self-contained HTML file (no server, opens in any browser) with six tabs:
 4. **Build and check.** A script writes the page, and a safety gate checks the table and the finished page before
    you share anything.
 
-The scripts are plain Ruby (standard library only) and **never connect to the internet**. All reading and judging
-happens inside your Claude Code session.
+The scripts are plain Ruby (standard library only) and **never connect to the internet**. The agent/model you use
+does read the CRM export, transcripts and email content to score them; that content is handled under the data,
+retention and training settings of that model provider and any enabled subagent workflow. Check those terms and your
+company policy before using real customer or employee data. Prefer redacted or synthetic data for the trial run.
 
 ## Install
 
@@ -82,6 +84,10 @@ Claude guides you through it, one step at a time, confirming each before moving 
 6. **A trial on one deal**, scored and built into the app so you can check names, accounts and scores.
 7. **The full run**: everything scored, assembled, built and checked, then a plain-English summary.
 
+Before the full run, have a manager or experienced coach review a small sample of the trial scores and quoted
+evidence. If their interpretation differs, tune the scoring guidance and repeat the sample before scaling up. This
+is a coaching aid, not an objective measure of rep performance.
+
 Already-scored calls are skipped on later runs, so refreshing monthly only scores what is new. Every setting is
 described in [`rep-coaching/references/config.md`](rep-coaching/references/config.md).
 
@@ -103,16 +109,21 @@ ruby scripts/check.rb    ../examples/bluewick
 
 - **Combined score per deal:** `(1 − (1 − call/5) × (1 − email/5)) × 10`. When the calls and the emails both show
   a skill, the deal scores higher than either alone.
-- **Engine weights:** each skill's weight is how much higher it scored on won deals than on lost ones, scaled to add
-  up to 100 within each method. This needs at least 40 closed deals with scores (10 won and 10 lost); below that,
-  every skill gets an equal weight and the page says so. It is a directional signal, not a full statistical model.
+- **Engine weights:** each skill's weight is based on the difference in average scores between won and lost deals,
+  scaled to add up to 100 within each method. This needs at least 40 closed deals with scores (10 won and 10 lost);
+  below that, every skill gets an equal weight and the page says so. This is an exploratory association, not evidence
+  that a skill caused a deal to win; it does not adjust for segment, deal size, lead source, or other factors.
 - **A rep's priorities:** `weight × (10 − score) × (team rank ÷ number of reps)²`. A skill climbs a rep's list when
   it matters, they are far from a perfect 10, and they sit near the bottom of the team on it.
 
 ## Privacy
 
-The finished page contains excerpts from real calls and the names of reps and accounts. Treat it as internal: share
-it inside your company, not publicly. Nothing is sent anywhere by the scripts.
+The finished page contains excerpts from real calls and the names of reps and accounts. Treat it as confidential:
+store and share it only in approved internal locations, and remove it when no longer needed. The local Ruby scripts
+do not make network requests, but this does **not** mean the workflow is fully local: the configured AI model reads
+the source data to score it. Review that provider's data-processing and retention settings, your organization's
+policy, and any subagent/model settings before using real data. Redact personal or sensitive information where
+possible. Never use public hosting for a real-data report.
 
 ## Repository layout
 

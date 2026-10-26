@@ -1,7 +1,7 @@
 [
   {"t": "MEDDIC", "m": ["MEDDIC"], "d": "A sales qualification checklist of six facts about the buyer: Metrics, Economic Buyer, Decision Criteria, Decision Process, Identify Pain and Champion. Missing facts mean the deal is not yet qualified."},
   {"t": "Sandler", "m": ["Sandler"], "d": "A sales method of seven steps the seller works through in order: Rapport, Upfront Contract, Pain, Budget, Decision, Fulfillment and Postsell."},
-  {"t": "Engine weight", "m": ["engine weight", "Engine weight", "engine weights", "Engine weights"], "d": "How much one skill moves the chance of winning a deal. Inside each framework the weights add up to 100. Rule of thumb: one extra point (out of 10) on a skill adds about weight ÷ 10 percentage points of win chance."},
+  {"t": "Engine weight", "m": ["engine weight", "Engine weight", "engine weights", "Engine weights"], "d": "A normalized share of positive average-score differences between won and lost deals, within one framework. It is descriptive and exploratory, not a causal effect or win-probability estimate."},
   {"t": "Combined score", "m": ["combined score", "Combined score"], "d": "One 0–10 score per skill per deal, merging the call score and the email score (each 0–5): (1 − (1 − call ÷ 5) × (1 − email ÷ 5)) × 10. When both sources show the skill, the deal scores higher than either alone."},
   {"t": "CRM", "m": ["CRM"], "d": "Customer relationship management system: where deals, their stage, owner and close date are recorded."},
   {"t": "Win rate", "m": ["win rate", "Win rate"], "d": "Deals won as a share of all closed deals (won plus lost)."},

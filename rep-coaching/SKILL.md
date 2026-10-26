@@ -7,7 +7,7 @@ description: Builds a self-contained rep coaching web app from a sales team's re
 
 Turns three exports (call transcripts, a CRM deal list, email threads) into one HTML file with six tabs: Start Here,
 MEDDIC & Sandler 101, Engine Weights, Team Summary, Rep Coaching, and Build Your Own. Scripts in `scripts/` do the
-mechanical work the same way every time; you (Claude) guide the user, and do all the reading and judging.
+mechanical work the same way every time; Claude Code guides the user and does the reading and judging.
 
 ## How to work with the user
 
@@ -21,7 +21,8 @@ The exports are manual and most users have never done some of them. Your job is 
 - **Plain English.** Define MEDDIC, Sandler, engine weight and combined score the first time you use them.
 - **Rules:** run scripts as `ruby <skill-folder>/scripts/<name>.rb <run-folder>`; never hand-edit anything in
   `workspace/` or the finished page (fix inputs or score files and re-run); tell the user the finished page contains
-  real call excerpts and is internal material.
+  real call excerpts and is confidential material. Scripts run locally, but model scoring processes source content
+  under the configured provider's data and retention settings; check these and company policy before real data is used.
 
 ## Step 0. Explain and set up
 
@@ -79,8 +80,13 @@ ask if the tone is right. Skip if the user prefers the generic wording.
 3. Score its calls and email thread yourself, following `references/scoring.md` exactly.
 4. Run `assemble.rb`, `build_app.rb` and `check.rb` (below). Open or describe the page: the rep, their scores, one
    coaching card with its call excerpt. Say plainly that weights are equal for now because one deal cannot teach them.
-5. Ask: do the rep name, account and scores look right? Fix any column, stage or linking problem now, before scoring
-   everything.
+5. Ask a sales manager or experienced coach to review the sample scores against the cited evidence. Discuss any
+   disagreement, tune the scoring guidance, and repeat the sample until the scoring standard is clear. This is a
+   qualitative calibration, not proof of statistical reliability; for a stronger check, independently review 5–10
+   calls spanning different reps and outcomes before a large run. Follow `references/calibration.md`; record
+   disagreements and resolved rubric changes in the run folder (not in generated score files).
+6. Ask: do the rep name, account, links and sample scores look right? Fix any column, stage, linking or scoring
+   problem now, before scoring everything.
 
 ## Step 6. Full run
 
@@ -91,8 +97,9 @@ ask if the tone is right. Skip if the user prefers the generic wording.
    its batch. Give the user a short progress update between batches.
 3. `ruby scripts/assemble.rb <run-folder>`: validates every score, builds the master table (one CRM row per deal plus
    one row per call, keyed on deal ID + call date), combines call and email evidence per deal with
-   `(1 − (1 − call/5)(1 − email/5)) × 10`, averages per rep with each deal counted once, and learns the engine
-   weights from closed deals (or falls back to equal weights and says why). If it lists problems in
+   `(1 − (1 − call/5)(1 − email/5)) × 10`, averages per rep with each deal counted once, and derives exploratory
+   engine weights from closed deals (or falls back to equal weights and says why). A low score means the skill was
+   not demonstrated in the scored material; it is not proof the rep lacks that skill. If it lists problems in
    `workspace/score_errors.txt`, re-score only those items and run it again.
 4. `ruby scripts/build_app.rb <run-folder>` writes the page named in `output`.
 5. `ruby scripts/check.rb <run-folder>` must print `ALL CHECKS PASSED` before you call the page ready. With Chrome or
@@ -103,7 +110,10 @@ ask if the tone is right. Skip if the user prefers the generic wording.
 
 In plain words: how many deals, calls and email threads went in; whether the weights were learned or equal, and why;
 the team's weakest skill; two or three reps whose top three stand out; where the file is and that it is internal.
-Suggest next steps: add more closed deals so weights can be learned; re-run monthly (already-scored calls are skipped).
+Explain that learned weights are associations in this historical sample, not causal effects or predicted win
+probabilities. Mention evidence coverage (calls, email threads, scored deals) and that missing topics are not proof of
+weak ability. Suggest next steps: review borderline coaching priorities with managers, add more closed deals, and
+re-run monthly (already-scored calls are skipped).
 
 ## If something goes wrong
 
@@ -126,5 +136,6 @@ this skill's folder: `ruby scripts/assemble.rb ../examples/bluewick`, then `buil
   transcript-to-deal matches), `assemble.rb`, `build_app.rb`, `check.rb`, and `lib.rb`.
 - `references/intake.md`: export instructions to share with the user, with fixes for common problems.
 - `references/scoring.md`: how to score a call or thread, and the exact output format.
+- `references/calibration.md`: human review workflow and interpretation limits.
 - `references/config.md`: every `config.json` setting.
 - `assets/`: generic B2B `content.json`, and the page template (`template.html`, `app.js`, `glossary.*`).

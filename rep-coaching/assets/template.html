@@ -510,15 +510,16 @@ svg.flow{display:block;width:100%;min-width:860px;height:auto;max-width:1180px;m
 <section id="tab-start" class="tab-panel active bright">
   <div class="hero opener wrap">
     <p class="eyebrow"><span class="live-dot"></span><span id="start-eyebrow">Rep coaching system</span></p>
-    <h1>Coach the one skill<br>that <em>wins the deal.</em></h1>
-    <p class="hero-copy">We score every rep&#39;s calls and emails against two sales frameworks, MEDDIC and Sandler, so all 13 dimensions of both get covered. The scores show where each rep is weak, and that is exactly what we coach them on.</p>
+    <h1>Coach the one skill<br>to practise next.</h1>
+    <p class="hero-copy">We review evidence from sales calls and emails against two sales frameworks, MEDDIC and Sandler. The scores suggest topics to practise; a low score means the skill was not demonstrated in the material scored, not that the rep lacks the ability.</p>
     <div class="route" aria-label="Where to go next">
       <button type="button" data-go="coaching"><small>01 / PICK A REP</small><strong>Open one rep's coaching plan</strong><b>↗</b></button>
       <button type="button" data-go="frameworks"><small>02 / LEARN THE LANGUAGE</small><strong>What MEDDIC and Sandler actually mean</strong><b>↗</b></button>
       <button type="button" data-go="team"><small>03 / FIND THE TEAM GAP</small><strong>See the skill the whole team is missing</strong><b>↗</b></button>
     </div>
   </div>
-  <div class="marquee" aria-hidden="true"><span>LISTEN TO THE CALL <b>→</b> SCORE 13 SKILLS <b>→</b> FIND THE COSTLIEST GAP <b>→</b> PRACTISE ONE THING <b>→</b> REPEAT <b>·</b></span><span>LISTEN TO THE CALL <b>→</b> SCORE 13 SKILLS <b>→</b> FIND THE COSTLIEST GAP <b>→</b> PRACTISE ONE THING <b>→</b> REPEAT <b>·</b></span><span>LISTEN TO THE CALL <b>→</b> SCORE 13 SKILLS <b>→</b> FIND THE COSTLIEST GAP <b>→</b> PRACTISE ONE THING <b>→</b> REPEAT <b>·</b></span></div>
+  <div class="marquee" aria-hidden="true"><span>LISTEN TO THE CALL <b>→</b> SCORE 13 SKILLS <b>→</b> FIND A COACHING FOCUS <b>→</b> PRACTISE ONE THING <b>→</b> REPEAT <b>·</b></span><span>LISTEN TO THE CALL <b>→</b> SCORE 13 SKILLS <b>→</b> FIND A COACHING FOCUS <b>→</b> PRACTISE ONE THING <b>→</b> REPEAT <b>·</b></span><span>LISTEN TO THE CALL <b>→</b> SCORE 13 SKILLS <b>→</b> FIND A COACHING FOCUS <b>→</b> PRACTISE ONE THING <b>→</b> REPEAT <b>·</b></span></div>
+  <p class="wrap" style="padding-top:18px;padding-bottom:18px;color:var(--muted);font-size:14px"><strong>Keep this report internal.</strong> It may contain real customer quotes and identifiable rep and account names. Store and share it only in approved locations.</p>
 </section>
 
 <!-- ═════════════ MEDDIC & SANDLER 101 ═════════════ -->
@@ -578,7 +579,7 @@ svg.flow{display:block;width:100%;min-width:860px;height:auto;max-width:1180px;m
     <div class="sec-head"><div><span class="kicker">How a score is made</span><h2>From one call to a coaching priority.</h2></div><p>Four steps turn a conversation into a number a manager can act on.</p></div>
     <p class="label">Step 1 · Every call gets a 0–5 on every skill</p>
     <div class="rubric">
-      <div class="rb rb0"><b>0</b><strong>Absent</strong><span>Never came up.</span></div>
+      <div class="rb rb0"><b>0</b><strong>Not observed</strong><span>No evidence in this conversation; not a judgment of the rep's overall ability.</span></div>
       <div class="rb rb1"><b>1</b><strong>Trace</strong><span>A passing mention, nothing specific.</span></div>
       <div class="rb rb2"><b>2</b><strong>Partial</strong><span>Discussed, but stayed generic. No name, no number.</span></div>
       <div class="rb rb3"><b>3</b><strong>Substantive</strong><span>At least one hard detail, confirmed by the buyer.</span></div>
@@ -587,7 +588,7 @@ svg.flow{display:block;width:100%;min-width:860px;height:auto;max-width:1180px;m
     </div>
     <div class="math">
       <div class="card"><h4>Step 2 · Combine call and email</h4><p>The call score and the email score for the same deal merge into one score out of 10. When both sources show the skill, the combined score climbs higher than either alone.</p><div class="formula">combined = (1 − (1 − call ÷ 5) × (1 − email ÷ 5)) × 10</div><p>A rep's score on a skill is the average of that combined number across all their deals.</p></div>
-      <div class="card"><h4>Step 3 · Weigh each skill</h4><p>Not every skill moves the result equally. The <strong>engine weight</strong> says how much one extra point on a skill raises the predicted chance of winning. The <button type="button" class="link" data-go="weights">Engine Weights tab</button> explains where each weight comes from.</p><div class="formula" id="weight-example"></div></div>
+      <div class="card"><h4>Step 3 · Weigh each skill</h4><p>The <strong>engine weight</strong> is a relative share of positive score differences between historical won and lost deals. It is an exploratory association, not a causal effect or a win-probability estimate. The <button type="button" class="link" data-go="weights">Engine Weights tab</button> explains the calculation.</p><div class="formula" id="weight-example"></div></div>
       <div class="card"><h4>Step 4 · Rank the gaps, per rep</h4><p>Three things decide a skill's place on a rep's list: its engine weight, how far the rep is from a perfect 10, and the rep's rank on the team. Squaring the rank makes being near the bottom of the team count most.</p><div class="formula">priority = weight × (10 − score) × (team rank ÷ 11)²</div><p id="prio-example"></p></div>
     </div>
   </div>
@@ -601,15 +602,15 @@ svg.flow{display:block;width:100%;min-width:860px;height:auto;max-width:1180px;m
 <section id="tab-weights" class="tab-panel">
   <div class="page-head wrap">
     <span class="kicker">Engine Weights</span>
-    <h1>Which skills actually win deals at {{COMPANY}}?</h1>
-    <p>Every skill gets an engine weight: a number that says how much that skill moves the chance of winning a deal. This tab shows the closed deals behind the weights, how often each skill went with a win, and why each one tends to matter.</p>
+    <h1>Which skill scores were associated with wins?</h1>
+    <p>Weights summarize unadjusted differences in historical scores between won and lost deals. They are exploratory associations—not causes or predictions—and can reflect other factors such as segment, deal size, lead source, or opportunity. Review sample sizes and context before using them.</p>
   </div>
   <div class="section wrap">
     <div class="sec-head"><div><span class="kicker">The idea in one minute</span><h2>Not every skill is worth the same.</h2></div></div>
     <div class="ew-explain">
-      <div class="card"><span class="ew-n">1</span><h4>What it is</h4><p>An engine weight is the share of a framework&#39;s win prediction that comes from one skill. Inside each framework the weights add up to 100. A big weight means that skill decides a lot of deals.</p></div>
+      <div class="card"><span class="ew-n">1</span><h4>What it is</h4><p>An engine weight is the normalized share of positive average-score differences between won and lost deals, within one framework. It is descriptive, not a causal or predictive model.</p></div>
       <div class="card"><span class="ew-n">2</span><h4>How it was learned</h4><p id="ew-how">Each skill&#39;s weight comes from how much higher it scored on deals that were won than on deals that were lost. A skill that barely differs gets little weight; one that scored higher on lost deals gets none.</p></div>
-      <div class="card"><span class="ew-n">3</span><h4>How to read it</h4><p id="ew-rule">Rule of thumb: one extra point on a skill (out of 10) adds about <strong>weight ÷ 10</strong> percentage points to the chance of winning.</p></div>
+      <div class="card"><span class="ew-n">3</span><h4>How to read it</h4><p id="ew-rule">Compare weights only within the same framework. They do not represent percentage points of win probability; small samples and confounding can make the association unstable.</p></div>
     </div>
   </div>
   <div class="section wrap">
@@ -617,7 +618,7 @@ svg.flow{display:block;width:100%;min-width:860px;height:auto;max-width:1180px;m
     <div class="stats" id="ew-kpis"></div>
   </div>
   <div class="section wrap">
-    <div class="sec-head"><div><span class="kicker">Strong versus weak</span><h2>When a skill was strong, how often did {{COMPANY}} win?</h2></div><p>Each row compares deals where the skill was weak (under 4 out of 10) with deals where it was strong (6 and up). The wider the gap, the bigger the weight.</p></div>
+    <div class="sec-head"><div><span class="kicker">Historical outcomes</span><h2>How win rates differed by observed score.</h2></div><p>Each row compares deals where the skill had a lower observed score (under 4 out of 10) with a higher one (6 and up). These unadjusted rates are descriptive; check the sample counts and do not infer causation.</p></div>
     <div class="card dumb" id="ew-dumbbell"></div>
   </div>
   <div class="section wrap">
@@ -658,7 +659,7 @@ svg.flow{display:block;width:100%;min-width:860px;height:auto;max-width:1180px;m
   <div class="section wrap" id="team-grid">
     <div class="sec-head"><div><span class="kicker">The team at a glance</span><h2>Every rep, every skill, one grid.</h2></div></div>
     <div class="heat-wrap"><table class="heat" id="heat"></table></div>
-    <div class="legend"><span><i style="background:var(--weak)"></i>Under 4 · weak</span><span><i style="background:var(--building)"></i>4–6 · building</span><span><i style="background:var(--strong)"></i>6+ · strong</span><span>Under each skill: its engine weight, how much it moves the odds of winning</span></div>
+    <div class="legend"><span><i style="background:var(--weak)"></i>Under 4 · lower observed score</span><span><i style="background:var(--building)"></i>4–6 · developing signal</span><span><i style="background:var(--strong)"></i>6+ · higher observed score</span><span>Weights are historical associations, not odds of winning</span></div>
   </div>
 
 </section>
@@ -668,7 +669,7 @@ svg.flow{display:block;width:100%;min-width:860px;height:auto;max-width:1180px;m
   <div class="page-head wrap">
     <span class="kicker">Rep Coaching</span>
     <h1>Who needs coaching, and on what?</h1>
-    <p>Pick a rep to see their 13 skill scores, the three gaps worth the most deals, and exactly what to practise. The dark tick on each bar marks the team average.</p>
+    <p>Pick a rep to see their 13 observed skill scores, three suggested coaching focuses, and evidence from their calls. A low score means the skill was not demonstrated in the scored material; it is not proof the rep lacks that ability. Review context with the rep. The dark tick on each bar marks the team average.</p>
   </div>
   <div class="section wrap">
     <p class="label">Pick a rep</p>

@@ -174,7 +174,7 @@
       "why_low": "Rep doesn't set an agenda and a decision outcome at the start. Often a habit: it feels too formal. Symptom: calls end with 'let me think about it'.",
       "how_extend": "Upfront contracts are working. Carry them into follow-up emails too: 'By Friday we'll have X decided.'",
       "practice": "Start every call with an explicit agreement: 'Today I'd like to cover A, B and C. By the end, we'll have a yes or no on the next step. Sound right?'",
-      "weight_reason": "Good practice, but it often predicts outcomes weakly, because long agenda-setting shows up most on early, exploratory calls."
+      "weight_reason": "A clear agenda can improve call quality. Check whether this score is associated with outcomes in your own sample; do not treat that association as causal."
     },
     {
       "key": "pain", "fw": "sandler", "label": "Pain", "step": 3,
@@ -240,7 +240,7 @@
       "why_low": "Rep doesn't pin down stakeholders, timeline and competing alternatives, and misses the 'what happens after this?' question that exposes gaps.",
       "how_extend": "Decision mapping is solid. Go deeper with 'what would make you choose us over them?' to surface what you need to win on.",
       "practice": "Map who decides, how, on what timeline, and against what alternatives. Pin each down before the demo.",
-      "weight_reason": "The approval mechanics overlap heavily with Decision Process and Economic Buyer, so on their own they usually add less to the prediction."
+      "weight_reason": "Approval mechanics overlap with Decision Process and Economic Buyer. Compare their evidence and outcome associations in your own data rather than assuming one independently predicts results."
     },
     {
       "key": "fulfillment", "fw": "sandler", "label": "Fulfillment", "step": 6,

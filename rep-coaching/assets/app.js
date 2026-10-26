@@ -85,10 +85,10 @@
     $('start-eyebrow').textContent = `Rep coaching system · ${REPS.length} reps · 13 dimensions`;
     const f = teamFacts();
     const stats = [
-      { k: 'meddic', v: `${f1(TEAM_M)}<small> /10</small>`, l: 'Team MEDDIC average', d: 'How well the team uncovers the six facts about the buyer.' },
-      { k: 'sandler', v: `${f1(TEAM_S)}<small> /10</small>`, l: 'Team Sandler average', d: 'How well the team runs the seven steps of the conversation.' },
-      { k: 'weakest', v: `${esc(f.weakest.label)}<small> ${f1(TEAM[f.weakest.label])}</small>`, l: 'Weakest team skill', d: `The lowest-scoring of the 13 skills across all ${N} reps.` },
-      { k: 'fix', v: `${f.topN}<small> of ${N}</small>`, l: `Reps whose #1 fix is ${esc(f.topFix)}`, d: `Plans are personal: ${f.plans} different top-three plans across ${N} reps.` }
+      { k: 'meddic', v: `${f1(TEAM_M)}<small> /10</small>`, l: 'Team MEDDIC average', d: 'Average score on buyer signals observed in the scored material.' },
+      { k: 'sandler', v: `${f1(TEAM_S)}<small> /10</small>`, l: 'Team Sandler average', d: 'Average score on conversation signals observed in the scored material.' },
+      { k: 'weakest', v: `${esc(f.weakest.label)}<small> ${f1(TEAM[f.weakest.label])}</small>`, l: 'Lowest observed score', d: `The lowest-scoring skill in the material scored across ${N} reps; not a measure of underlying ability.` },
+      { k: 'fix', v: `${f.topN}<small> of ${N}</small>`, l: `Reps with #1 suggested focus: ${esc(f.topFix)}`, d: `Plans are personal: ${f.plans} different top-three suggestions across ${N} reps.` }
     ];
     $('start-stats').innerHTML = stats.map(s => `<button type="button" class="stat${openStat === s.k ? ' open' : ''}" data-stat="${s.k}" aria-expanded="${openStat === s.k}" aria-controls="stat-detail"><div class="v num">${s.v}</div><div class="l">${s.l}</div><div class="d">${s.d}</div><span class="more">${openStat === s.k ? 'Hide ▴' : 'What this means ▾'}</span></button>`).join('');
     $('start-stats').querySelectorAll('button.stat').forEach(b => b.addEventListener('click', () => {
@@ -111,10 +111,9 @@
     const byTeam = list.slice().sort((a, b) => TEAM[a.label] - TEAM[b.label]);
     const low = byTeam.slice(0, 2), high = byTeam[byTeam.length - 1];
     const heavy = list.slice().sort((a, b) => b.weight - a.weight)[0];
-    const share = Math.round(avg * 10);
     const what = fw === 'meddic'
-      ? `On a typical deal the team gathers about ${share}% of the buyer facts MEDDIC asks for. The deal looks real, but key facts are missing when it reaches the forecast.`
-      : `On a typical call the team runs about ${share}% of the Sandler steps well. Conversations go smoothly, but some steps get skipped or rushed.`;
+      ? `The team's average is ${f1(avg)} out of 10 on the buyer signals observed in the scored material. Lower scores identify topics to review in context; they do not prove a rep lacks the skill.`
+      : `The team's average is ${f1(avg)} out of 10 on the conversation signals observed in the scored material. Lower scores identify topics to review in context; they do not prove a rep lacks the skill.`;
     return `<h3>${FW_NAME[fw]} average: ${f1(avg)} out of 10</h3><div class="sd-grid"><div>
       <h5>What it means</h5><p>${what}</p>
       <h5>Where the gap is</h5><p>Weakest across the team: <b>${esc(low[0].label)}</b> (${f1(TEAM[low[0].label])}) and <b>${esc(low[1].label)}</b> (${f1(TEAM[low[1].label])}). Strongest: <b>${esc(high.label)}</b> (${f1(TEAM[high.label])}). ${low.some(d => d === heavy) || low.some(d => d.weight >= 20) ? `That matters, because ${esc(heavy.label)} carries the biggest ${FW_NAME[fw]} weight (${heavy.weight}%).` : ''}</p>
@@ -143,7 +142,7 @@
       const rows = REPS.map(r => { const p = priorities(r)[0]; return `<div class="fix-row"><span>${esc(r.rep)}</span><span><span class="pill ${p.d.fw}">${esc(p.d.label)}</span> <span class="num" style="color:var(--muted);font-size:13px">${f2(p.v)} · ${ordinal(p.rank)} of ${N}</span></span></div>`; }).join('');
       const others = Object.entries(f.counts).filter(([k]) => k !== f.topFix).map(([k, n]) => `${esc(k)} (${n})`).join(', ');
       html = `<h3>${f.topN} of ${N} reps share the same #1 fix: ${esc(f.topFix)}</h3><div class="sd-grid"><div>
-        <h5>What it means</h5><p>Each rep's #1 fix is the skill that costs them the most deals, judged on three things: how much it moves the odds of winning, how far they are from a perfect 10, and where they rank on the team. ${f.topN} reps land on ${esc(f.topFix)}; the rest are spread across ${others || 'other skills'}.</p>
+        <h5>What it means</h5><p>Each rep's #1 suggested focus is ranked using three signals: its historical outcome association, the gap in observed scores, and their relative team rank. This is a heuristic, not a count of deals lost or a causal estimate. ${f.topN} reps land on ${esc(f.topFix)}; the rest are spread across ${others || 'other skills'}.</p>
         <h5>What to do about it</h5><ul><li>Coach ${esc(f.topFix)} as a group with the ${f.topN} reps who share it; it saves ${f.topN - 1} separate sessions.</li><li>Coach everyone else one-to-one on their own #1.</li><li>Open any rep on the Rep Coaching tab for their full plan, with excerpts from their own calls.</li></ul>
       </div><div><h5>Every rep's #1 fix</h5><div class="fix-list">${rows}</div></div></div>`;
     }
@@ -183,7 +182,7 @@
 
   function verdict(x, r) {
     const s = standing(x, r);
-    if (x.d.weight === 0) return 'Does not predict wins in this data. Keep it light: agree the agenda in the first minute, then move on.';
+    if (x.d.weight === 0) return 'This skill had no positive score difference in the historical sample. That does not mean it is unimportant; review it in the context of the deal.';
     if (s.isBest) return `The team's best at this. Keep doing it, and show others how you do it.`;
     if (x.rank <= 3) return `Top three on the team (${ordinal(x.rank)}). A strength to protect.`;
     if (s.delta <= -0.3) return `${f1(-s.delta)} below the team average, ${ordinal(x.rank)} of ${N}. Next in line after your top three.`;
@@ -237,7 +236,7 @@
     const why = `${esc(x.d.label)} carries ${x.d.weight}% of the ${FW_NAME[x.d.fw]} weight, you are ${f1(10 - x.v)} points from a perfect 10, and you rank ${ordinal(x.rank)} of ${N} on the team.`;
     const target = s.isBest
       ? `You already lead the team here; the next step is consistency, not catching up.`
-      : `Closing the gap to ${esc(s.best.rep)} (${f1(s.best.scores[x.d.label])}) is worth about <b>+${f1(s.lift)} points</b> of ${FW_NAME[x.d.fw]} win chance on a typical deal.`;
+      : `Your observed score is ${f1(Math.max(s.best.scores[x.d.label] - x.v, 0))} points below ${esc(s.best.rep)} (${f1(s.best.scores[x.d.label])}). Use the cited examples to decide whether that gap is a useful coaching focus.`;
     return `<article class="coach-card c${i}">
       <header>
         <span class="n">#${i + 1}</span>
@@ -277,11 +276,11 @@
       </div>
       <div class="profile-body">
         <p class="label">Your top 3 this week · ranked for ${esc(r.rep.split(' ')[0])}, not the team</p>
-        <p class="rule-note">Each skill is ranked by how much it moves the odds of winning, how far you are from a perfect 10, and where you sit on the team. Being near the bottom of the team on a skill counts most.</p>
+        <p class="rule-note">Suggested focus areas use historical outcome associations, observed score gaps, and team rank. They are prompts for a manager-rep conversation, not estimates of deals lost or proof of ability. Being near the bottom of the team on a skill counts most.</p>
         ${all.slice(0, 3).map((x, i) => topCard(x, i, r)).join('')}
         <div class="bars-grid">
-          <div><p class="label">MEDDIC skills · weakest first</p>${sortWeak(MEDDIC).map(d => barRow(d, r.scores[d.label])).join('')}</div>
-          <div><p class="label">Sandler skills · weakest first</p>${sortWeak(SANDLER).map(d => barRow(d, r.scores[d.label])).join('')}</div>
+          <div><p class="label">MEDDIC skills · lowest observed score first</p>${sortWeak(MEDDIC).map(d => barRow(d, r.scores[d.label])).join('')}</div>
+          <div><p class="label">Sandler skills · lowest observed score first</p>${sortWeak(SANDLER).map(d => barRow(d, r.scores[d.label])).join('')}</div>
         </div>
         <div class="legend"><span><i style="background:var(--weak)"></i>Under 4</span><span><i style="background:var(--building)"></i>4–6</span><span><i style="background:var(--strong)"></i>6+</span><span><i class="tick"></i>Team average</span></div>
         <p class="label" style="margin-top:32px">The other ${all.length - 3} skills · in priority order, each coached from your calls</p>
@@ -323,9 +322,9 @@
     const ask = (c.qs || [])[0];
     const share = d.weight / Math.max(...DIMS.map(x => x.weight)) * 100;
     const wonLost = d.anti
-      ? `In ${esc(APP.company.name)}'s data, won deals scored this slightly <em>lower</em> than lost deals${d.won ? ` (${d.won} vs ${d.lost} per call)` : ''}, so the engine gives it no weight. Still good practice; it just doesn't predict the result.`
-      : d.won ? `Per call, won deals average ${d.won} and lost deals ${d.lost} on the 0–5 scale. One extra point moves the predicted chance of winning by about ${f1(d.weight / 10)} percentage points.`
-      : `Not enough closed deals with calls yet to compare won and lost calls. One extra point is worth about ${f1(d.weight / 10)} percentage points at the current weight.`;
+      ? `In ${esc(APP.company.name)}'s data, won deals scored this slightly <em>lower</em> than lost deals${d.won ? ` (${d.won} vs ${d.lost} per call)` : ''}, so the engine gives it no positive weight. This small, unadjusted association does not show that the skill is unimportant.`
+      : d.won ? `In this sample, per-call averages were ${d.won} for won deals and ${d.lost} for lost deals (0–5 scale). This unadjusted association is descriptive, not a predicted win-probability change.`
+      : `Not enough closed deals with calls yet to compare won and lost calls. Treat the current weight as a ranking aid, not a predicted win-probability change.`;
     return `<article class="letter-card" id="dim-${d.key}">
       <div class="lc-top"><span class="big-letter c${i % 7}">${esc(mark)}</span><div><h4>${esc(d.label)}<span class="pill ${d.fw}">${FW_NAME[d.fw]}</span></h4><div class="plain">${esc(d.plain)}</div></div></div>
       <div class="lc-body">
@@ -351,14 +350,14 @@
     $('sub-rail').querySelectorAll('a').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const el = document.querySelector(a.getAttribute('href')); if (el) el.scrollIntoView({ block: 'center' }); }));
 
     const eb = DIMS.slice().sort((a, b) => b.weight - a.weight)[0];
-    $('weight-example').textContent = `${eb.label}: weight ${eb.weight}% → +1 point ≈ +${f1(eb.weight / 10)} points of win chance`;
+    $('weight-example').textContent = `${eb.label}: ${eb.weight}% of the positive score-difference weight within its framework (not percentage points of win probability)`;
     const r = REPS[REPS.length - 1], p = priorities(r)[0];
     $('prio-example').innerHTML = `Example: ${esc(r.rep)} scores ${f2(p.v)} on ${esc(p.d.label)} and ranks ${ordinal(p.rank)} of ${N}. ${p.d.weight} × ${f1(10 - p.v)} × (${p.rank} ÷ ${N})² = <strong>${Math.round(p.p)}</strong>, the largest of their 13, so it is their #1 priority. Every rep gets their own top three.`;
 
     const max = Math.max(...DIMS.map(d => d.weight));
     $('wchart').innerHTML = DIMS.slice().sort((a, b) => b.weight - a.weight).map(d =>
-      `<div class="wrow" data-tip="${esc(`<b>${esc(d.label)}</b> · ${FW_NAME[d.fw]}<br>Engine weight ${d.weight}%<br>+1 point ≈ +${f1(d.weight / 10)} pts win chance`)}"><span>${esc(d.label)}</span><span class="wtrack"><span class="wbar ${d.fw}" style="width:${Math.max(d.weight / max * 100, 0.8).toFixed(1)}%"></span></span><span class="wval num">${d.weight}%</span></div>`).join('')
-      + `<p class="weight-note" style="margin-top:12px">Weights add up to 100 inside each method, so a MEDDIC weight compares with other MEDDIC skills, and a Sandler weight with other Sandler skills.</p>`;
+      `<div class="wrow" data-tip="${esc(`<b>${esc(d.label)}</b> · ${FW_NAME[d.fw]}<br>Relative weight ${d.weight}%<br>Descriptive historical association; not a probability`)}"><span>${esc(d.label)}</span><span class="wtrack"><span class="wbar ${d.fw}" style="width:${Math.max(d.weight / max * 100, 0.8).toFixed(1)}%"></span></span><span class="wval num">${d.weight}%</span></div>`).join('')
+      + `<p class="weight-note" style="margin-top:12px">Weights add up to 100 inside each method. They are normalized shares of positive average-score differences in this historical sample, not causal effects or win probabilities. MEDDIC and Sandler weights compare only within their own framework.</p>`;
     renderQuiz();
   }
 
@@ -368,7 +367,7 @@
     $('ew-title').textContent = h.period ? `${h.deals} closed deals, ${h.period}.` : `${h.deals} closed deals.`;
     $('ew-source').textContent = h.note || '';
     const top = DIMS.slice().sort((a, b) => b.weight - a.weight)[0];
-    $('ew-rule').innerHTML = `Rule of thumb: one extra point on a skill (out of 10) adds about <strong>weight ÷ 10</strong> percentage points to the chance of winning. ${esc(top.label)} at ${top.weight} means one more point is worth about ${f1(top.weight / 10)} points of win chance.`;
+    $('ew-rule').innerHTML = `Weights are normalized shares of positive average-score differences between won and lost deals. They are descriptive associations in this sample—not causal effects or a prediction of win probability. ${esc(top.label)} has the largest relative weight (${top.weight}%) in its framework.`;
     const kpis = [
       { v: `${h.deals}`, l: 'Closed deals with scores', d: `Won or lost deals that have call or email scores${h.period ? `, ${h.period}` : ''}.` },
       { v: `${h.won}<small> won</small>`, l: h.base_wr == null ? 'Win rate –' : `Win rate ${h.base_wr}%`, d: `${h.lost} closed deals were lost.` },
@@ -384,17 +383,17 @@
         list.map(d => {
           if (d.weak_wr == null || d.strong_wr == null) return `<div class="dumb-row"><span>${esc(d.label)}</span><span class="dumb-track"></span><span class="dumb-val">too few deals</span></div>`;
           const a = Math.min(d.weak_wr, d.strong_wr), b = Math.max(d.weak_wr, d.strong_wr);
-          const tipHtml = `<b>${esc(d.label)}</b> · weight ${d.weight}%<br>Skill weak: won ${d.weak_wr}% of deals<br>Skill strong: won ${d.strong_wr}% of deals`;
+      const tipHtml = `<b>${esc(d.label)}</b> · weight ${d.weight}%<br>Lower observed score: won ${d.weak_wr}% (n=${d.weak_n})<br>Higher observed score: won ${d.strong_wr}% (n=${d.strong_n})`;
           return `<div class="dumb-row" data-tip="${esc(tipHtml)}"><span>${esc(d.label)}</span><span class="dumb-track"><span class="dumb-line" style="left:${pos(a)}%;width:${(pos(b) - pos(a)).toFixed(1)}%"></span><span class="dumb-dot w" style="left:${pos(d.weak_wr)}%"></span><span class="dumb-dot s" style="left:${pos(d.strong_wr)}%"></span></span><span class="dumb-val num"><b>${d.weak_wr}%</b> → <b>${d.strong_wr}%</b></span></div>`;
         }).join('');
     };
     $('ew-dumbbell').innerHTML = group('meddic') + group('sandler') +
       `<div class="dumb-axis"><span></span><div><span>${lo}% win rate</span><span>${hi}%</span></div><span></span></div>
-       <div class="legend"><span><i style="background:var(--weak);border-radius:50%"></i>Deals where the skill was weak (under 4)</span><span><i style="background:var(--strong);border-radius:50%"></i>Deals where it was strong (6+)</span><span>Overall win rate: ${h.base_wr}%</span></div>`;
+        <div class="legend"><span><i style="background:var(--weak);border-radius:50%"></i>Lower observed score (under 4)</span><span><i style="background:var(--strong);border-radius:50%"></i>Higher observed score (6+)</span><span>Overall win rate: ${h.base_wr}%</span></div>`;
 
     const cards = fw => DIMS.filter(d => d.fw === fw).sort((a, b) => b.weight - a.weight).map(d =>
       `<article class="ew-card ${fw}"><header><h4>${esc(d.label)}</h4><span class="wt num">${d.weight}%</span></header><p>${esc(d.reason)}</p>
-        <div class="ew-stats"><span>Weak: won <b>${d.weak_wr == null ? '–' : d.weak_wr + '%'}</b></span><span>Strong: won <b>${d.strong_wr == null ? '–' : d.strong_wr + '%'}</b></span><span>+1 point ≈ <b>${d.anti ? '0' : '+' + f1(d.weight / 10)}</b> pts win chance</span></div></article>`).join('');
+        <div class="ew-stats"><span>Weak: won <b>${d.weak_wr == null ? '–' : d.weak_wr + '%'}</b> (n=${d.weak_n})</span><span>Strong: won <b>${d.strong_wr == null ? '–' : d.strong_wr + '%'}</b> (n=${d.strong_n})</span><span>Descriptive outcome association; not causal</span></div></article>`).join('');
     $('ew-cards').innerHTML = ['meddic', 'sandler'].map(fw =>
       `<div class="ew-group"><span class="fw-badge ${fw === 'meddic' ? 'm' : 's'}" style="background:var(--${fw === 'meddic' ? 'indigo' : 'coral'})">${FW_NAME[fw]}</span><div class="ew-grid">${cards(fw)}</div></div>`).join('');
   }

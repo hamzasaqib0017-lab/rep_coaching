@@ -20,7 +20,7 @@ this conversation only.
 
 | Score | Meaning |
 |---|---|
-| 0 | **Absent.** Never came up. No language, no inference. |
+| 0 | **Not observed.** This conversation contains no evidence of the skill. This describes the material scored, not the rep's underlying ability. |
 | 1 | **Trace.** A passing mention, no named person or number, no commitment. |
 | 2 | **Partial.** Discussed but generic: no name for the economic buyer, no number for metrics, no ranking for criteria. |
 | 3 | **Substantive.** At least one hard anchor (a name, a number, a criterion, a date) plus some confirmation from the buyer. |
@@ -28,7 +28,9 @@ this conversation only.
 | 5 | **Nailed.** Fully qualified by the framework's own definition. |
 
 Be conservative. Score 3 only when the evidence really shows substantive coverage, not because the topic came up.
-Every point of drift roughly doubles in the combined deal score and carries into the rep's profile.
+Do not treat a low score or an unmentioned topic as proof the rep lacks the skill. A single call or email thread may
+not provide a fair opportunity to demonstrate every skill; use the quoted reason to show what was and was not
+observable, and let managers consider context before acting on a priority.
 Use the skill's `anchors` (examples of a 1, a 3 and a 5) to calibrate.
 
 ### Evidence rule
@@ -74,7 +76,8 @@ Path: `workspace/scores/calls/<call_id>.json` (use the `call_id` from the queue 
   no date, use a date in the file name; if there is none either, stop and ask the user rather than guess.
 - Two calls on the same deal can never share a date. If they genuinely happened on the same day, tell the user;
   the master table's key is deal ID + call date.
-- Missing evidence is a `0` with a reason that says so, never a blank.
+- No evidence in the conversation is a `0` with a reason that says so, never a blank. It must not be paraphrased as
+  a demonstrated deficiency in the rep.
 
 ## Output: one file per email thread
 
